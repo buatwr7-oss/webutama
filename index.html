@@ -1,0 +1,1178 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SMK Wiraguna Limbangan</title>
+    <link rel="icon" type="image/png" href="img/logo.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --navy: #3e5074;
+        --parchment: #f5f3ed;
+        --amber: #f2c511;
+        --sage: #5b6e93;
+        --ink: #1b1b1b;
+        --line: #dbd8cf;
+        --white: #ffffff;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--parchment);
+        color: var(--ink);
+        font-family: "Inter", sans-serif;
+        line-height: 1.6;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Fraunces", serif;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+      .eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--sage);
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      /* ---------- NAV ---------- */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(247, 244, 238, 0.92);
+        backdrop-filter: blur(6px);
+        border-bottom: 1px solid var(--line);
+      }
+      nav.wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 72px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        overflow: hidden;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .brand-mark img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .brand-name {
+        font-family: "Fraunces", serif;
+        font-weight: 600;
+        font-size: 1.05rem;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.6rem;
+        font-size: 0.9rem;
+      }
+      .nav-links a {
+        position: relative;
+        padding: 4px 0;
+        color: var(--ink);
+      }
+      .nav-links a:hover {
+        color: var(--navy);
+      }
+      .nav-links a.external {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: var(--sage);
+      }
+      .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--navy);
+      }
+
+      @media (max-width: 860px) {
+        .nav-links {
+          position: absolute;
+          top: 72px;
+          left: 0;
+          right: 0;
+          background: var(--parchment);
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 1rem 1.5rem 1.5rem;
+          gap: 1rem;
+          border-bottom: 1px solid var(--line);
+          display: none;
+        }
+        .nav-links.open {
+          display: flex;
+        }
+        .nav-toggle {
+          display: block;
+        }
+      }
+
+      /* ---------- HERO ---------- */
+      .hero {
+        padding: 4.5rem 0 4.5rem;
+        border-bottom: 1px solid var(--line);
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 3rem;
+        align-items: center;
+      }
+      .hero .eyebrow {
+        margin-bottom: 1rem;
+      }
+      .hero h1 {
+        font-size: clamp(2.1rem, 4.2vw, 3.2rem);
+        line-height: 1.1;
+      }
+      .hero p.lead {
+        margin-top: 1.3rem;
+        max-width: 46ch;
+        font-size: 1.05rem;
+        color: #3a3a38;
+      }
+      .hero-actions {
+        margin-top: 2rem;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0.75rem 1.4rem;
+        border-radius: 2px;
+        font-size: 0.92rem;
+        font-weight: 500;
+        font-family: "Inter", sans-serif;
+        border: 1px solid transparent;
+        cursor: pointer;
+      }
+      .btn-primary {
+        background: var(--navy);
+        color: var(--parchment);
+      }
+      .btn-primary:hover {
+        background: #2c3a56;
+      }
+      .btn-ghost {
+        border-color: var(--navy);
+        color: var(--navy);
+      }
+      .btn-ghost:hover {
+        background: var(--navy);
+        color: var(--parchment);
+      }
+      .hero-image {
+        aspect-ratio: 4/3;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #e5e2d8;
+        position: relative;
+      }
+      .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .img-caption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(22, 33, 62, 0.82);
+        color: var(--parchment);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.04em;
+        padding: 6px 10px;
+      }
+      @media (max-width: 860px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-image {
+          order: -1;
+        }
+      }
+
+      /* ---------- SECTION SHELL ---------- */
+      section {
+        padding: 4.2rem 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .section-head {
+        margin-bottom: 2.2rem;
+        max-width: 60ch;
+      }
+      .section-head h2 {
+        font-size: clamp(1.6rem, 3vw, 2.1rem);
+        color: var(--navy);
+        margin-top: 0.6rem;
+      }
+
+      /* ---------- PROFIL ---------- */
+      .profil-grid {
+        display: grid;
+        grid-template-columns: 1fr 0.85fr;
+        gap: 3rem;
+        align-items: start;
+      }
+      .profil-grid p {
+        margin-bottom: 1rem;
+        color: #3a3a38;
+      }
+      .profil-image {
+        aspect-ratio: 4/3;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #e5e2d8;
+        margin-bottom: 1rem;
+      }
+      .profil-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .vm-card {
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 1.4rem;
+      }
+      .vm-card + .vm-card {
+        margin-top: 1rem;
+      }
+      .vm-card .eyebrow {
+        margin-bottom: 0.5rem;
+      }
+      @media (max-width: 860px) {
+        .profil-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ---------- BERITA (signature timeline with thumbnails) ---------- */
+      .timeline {
+        border-left: 2px solid var(--line);
+        margin-left: 6px;
+      }
+      .t-item {
+        position: relative;
+        padding: 0 0 2.2rem 2rem;
+        display: flex;
+        gap: 1.2rem;
+      }
+      .t-item:last-child {
+        padding-bottom: 0;
+      }
+      .t-item::before {
+        content: "";
+        position: absolute;
+        left: -7px;
+        top: 4px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--amber);
+        border: 2px solid var(--parchment);
+      }
+      .t-thumb {
+        flex: 0 0 108px;
+        width: 108px;
+        height: 84px;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #e5e2d8;
+      }
+      .t-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .t-body {
+        flex: 1;
+        min-width: 0;
+      }
+      .t-date {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.78rem;
+        color: var(--sage);
+        margin-bottom: 0.4rem;
+      }
+      .t-item h3 {
+        font-size: 1.1rem;
+        color: var(--navy);
+        margin-bottom: 0.35rem;
+      }
+      .t-item p {
+        color: #3a3a38;
+        max-width: 60ch;
+        font-size: 0.95rem;
+      }
+      .tag {
+        display: inline-block;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        background: #edeae0;
+        color: var(--navy);
+        padding: 2px 8px;
+        border-radius: 2px;
+        margin-bottom: 0.5rem;
+      }
+      @media (max-width: 600px) {
+        .t-item {
+          flex-direction: column;
+        }
+        .t-thumb {
+          width: 100%;
+          height: 150px;
+        }
+      }
+
+      /* ---------- STAF ---------- */
+      .staf-scroll {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+        gap: 1rem;
+      }
+      .staf-card {
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .staf-photo {
+        aspect-ratio: 4/3;
+        background: #e5e2d8;
+      }
+      .staf-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .staf-info {
+        padding: 0.9rem 1rem;
+      }
+      .staf-info .name {
+        font-family: "Fraunces", serif;
+        font-size: 1rem;
+        color: var(--navy);
+        line-height: 1.25;
+      }
+      .staf-info .role {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--sage);
+        margin-top: 5px;
+      }
+      .staf-hint {
+        display: none;
+        font-size: 0.8rem;
+        color: #6b6a63;
+        margin-top: 0.8rem;
+      }
+
+      @media (max-width: 700px) {
+        .staf-scroll {
+          display: flex;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+          gap: 0.8rem;
+        }
+        .staf-scroll::-webkit-scrollbar {
+          display: none;
+        }
+        .staf-card {
+          flex: 0 0 76%;
+          scroll-snap-align: start;
+        }
+        .staf-hint {
+          display: block;
+        }
+      }
+
+      /* ---------- GALERI (ringkas) ---------- */
+      .galeri-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.8rem;
+      }
+      .galeri-grid figure {
+        overflow: hidden;
+        border-radius: 4px;
+        aspect-ratio: 4/3;
+        background: #e5e2d8;
+      }
+      .galeri-grid img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+      }
+      .galeri-grid figure:hover img {
+        transform: scale(1.06);
+      }
+      @media (max-width: 860px) {
+        .galeri-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ---------- KONTAK ---------- */
+      .kontak-grid {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 3rem;
+      }
+      .kontak-image {
+        aspect-ratio: 4/3;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #e5e2d8;
+      }
+      .kontak-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .kontak-list {
+        list-style: none;
+        margin-bottom: 1.2rem;
+      }
+      .kontak-list li {
+        display: flex;
+        gap: 0.9rem;
+        padding: 0.9rem 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .kontak-list li:first-child {
+        padding-top: 0;
+      }
+      .kontak-list .k-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        color: var(--sage);
+        min-width: 90px;
+        padding-top: 2px;
+      }
+      .map-box {
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        background: var(--white);
+        padding: 1.4rem;
+      }
+      .map-box .eyebrow {
+        margin-bottom: 0.6rem;
+      }
+      @media (max-width: 860px) {
+        .kontak-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ---------- TATA TERTIB ---------- */
+      .tatib {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 3rem;
+        align-items: center;
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 2.2rem;
+      }
+      .tatib-image {
+        aspect-ratio: 4/3;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #e5e2d8;
+      }
+      .tatib-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .tatib p {
+        color: #3a3a38;
+        margin: 1rem 0 1.4rem;
+        max-width: 52ch;
+      }
+      @media (max-width: 860px) {
+        .tatib {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ---------- FOOTER ---------- */
+      footer {
+        background: var(--navy);
+        color: #dad9d2;
+        padding: 3rem 0 1.6rem;
+      }
+      .footer-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #2a3a5c;
+      }
+      footer .brand-name {
+        color: var(--parchment);
+      }
+      .footer-links {
+        display: flex;
+        gap: 2.5rem;
+        flex-wrap: wrap;
+      }
+      .footer-col h4 {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #8c9ab8;
+        margin-bottom: 0.8rem;
+      }
+      .footer-col a,
+      .footer-col p {
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        color: #dad9d2;
+      }
+      .footer-col a:hover {
+        color: var(--amber);
+      }
+      .footer-bottom {
+        padding-top: 1.3rem;
+        font-size: 0.8rem;
+        color: #8c9ab8;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      /* ---------- OPTIMASI MOBILE ---------- */
+      @media (max-width: 600px) {
+        .wrap {
+          padding: 0 1.25rem;
+        }
+        nav.wrap {
+          height: 64px;
+        }
+        section {
+          padding: 3rem 0;
+        }
+        .hero {
+          padding: 2.6rem 0 3rem;
+        }
+        .hero-actions .btn {
+          flex: 1 1 auto;
+          justify-content: center;
+        }
+        .tatib {
+          padding: 1.4rem;
+        }
+        .footer-top {
+          gap: 1.6rem;
+        }
+        .footer-links {
+          gap: 1.6rem 2rem;
+        }
+
+        .kontak-list li {
+          flex-direction: column;
+          gap: 0.3rem;
+          padding: 1rem 0.2rem;
+        }
+        .kontak-list .k-label {
+          min-width: auto;
+        }
+        .map-box {
+          padding: 1.2rem 1.1rem;
+          margin: 0 0.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="wrap">
+        <div class="brand">
+          <div class="brand-mark">
+            <img src="img/logo.png" alt="Logo SMK Wiraguna Limbangan" />
+          </div>
+          <span class="brand-name">SMK Wiraguna Limbangan</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="#beranda">Beranda</a>
+          <a href="#profil">Profil</a>
+          <a href="#staf">Staf</a>
+          <a href="#berita">Berita</a>
+          <a href="#galeri">Galeri</a>
+          <a href="#kontak">Kontak</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Buka menu">
+          ☰
+        </button>
+      </nav>
+    </header>
+
+    <section class="hero" id="beranda">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Tahun Ajaran 2026/2027</p>
+          <h1>
+            Tumbuh berprestasi, berkarakter, dan siap melangkah lebih jauh.
+          </h1>
+          <p class="lead">
+            SMK Wiraguna Limbangan membentuk siswa yang kompeten di bidang
+            keahliannya dan matang secara karakter, dengan guru yang mendampingi
+            setiap langkah.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#profil">Lihat Profil Sekolah</a>
+            <a
+              class="btn btn-ghost"
+              href="https://contoh-ppdb.sekolah.id"
+              target="_blank"
+              rel="noopener"
+              >Info PPDB ↗</a
+            >
+          </div>
+        </div>
+        <div class="hero-image">
+          <img
+            src="img/utama.webp"
+            alt="Placeholder gambar siswa dan lingkungan sekolah"
+          />
+          <!-- <div class="img-caption">Ganti dengan foto sekolah asli</div> -->
+        </div>
+      </div>
+    </section>
+
+    <section id="profil">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Profil Sekolah</p>
+          <h2>Mengenal Wiraguna Limbangan lebih dekat</h2>
+        </div>
+        <div class="profil-grid">
+          <div>
+            <p>
+              Berdiri sejak 1998, SMK Wiraguna Limbangan memulai perjalanannya
+              sebagai sekolah rintisan dengan tiga rombongan belajar. Kini kami
+              tumbuh menjadi sekolah kejuruan dengan jaringan alumni yang
+              tersebar di berbagai dunia industri dan dunia kerja.
+            </p>
+            <p>
+              Kurikulum dirancang untuk menyeimbangkan penguasaan kompetensi
+              keahlian dengan pembentukan karakter, didukung program praktik
+              kerja lapangan dan bimbingan konseling yang aktif mendampingi
+              setiap siswa.
+            </p>
+            <p>
+              Fasilitas belajar mencakup bengkel praktik, laboratorium komputer,
+              perpustakaan, serta lapangan olahraga yang terbuka untuk kegiatan
+              intrakurikuler maupun ekstrakurikuler.
+            </p>
+          </div>
+          <div>
+            <div class="profil-image">
+              <img
+                src="img/tentang.webp"
+                alt="Placeholder gambar kegiatan sekolah"
+              />
+            </div>
+            <div class="vm-card">
+              <p class="eyebrow">Visi</p>
+              <p style="margin: 0">
+                Menjadi sekolah kejuruan yang melahirkan lulusan kompeten,
+                berintegritas, dan siap bersaing di dunia industri maupun dunia
+                kerja.
+              </p>
+            </div>
+            <div class="vm-card">
+              <p class="eyebrow">Misi</p>
+              <p style="margin: 0">
+                Menyelenggarakan pembelajaran berbasis kompetensi, membina
+                karakter melalui keteladanan, serta membuka ruang bagi setiap
+                siswa untuk mengembangkan potensinya.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="staf">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Para Staf</p>
+          <h2>Tenaga pendidik dan kependidikan</h2>
+        </div>
+        <div class="staf-scroll">
+          <div class="staf-card">
+            <div class="staf-photo">
+              <img
+                src="img/profilguru.webp"
+                alt="Placeholder foto Kepala Sekolah"
+              />
+            </div>
+            <div class="staf-info">
+              <div class="name">Drs. Agus Setiawan</div>
+              <div class="role">Kepala Sekolah</div>
+            </div>
+          </div>
+          <div class="staf-card">
+            <div class="staf-photo">
+              <img
+                src="img/profilguru.webp"
+                alt="Placeholder foto Wakil Kepala Sekolah"
+              />
+            </div>
+            <div class="staf-info">
+              <div class="name">Rina Marlina, S.Pd.</div>
+              <div class="role">Wakil Kepala Sekolah</div>
+            </div>
+          </div>
+          <div class="staf-card">
+            <div class="staf-photo">
+              <img
+                src="img/profilguru.webp"
+                alt="Placeholder foto guru produktif"
+              />
+            </div>
+            <div class="staf-info">
+              <div class="name">Budi Hartono, S.T.</div>
+              <div class="role">Guru Produktif</div>
+            </div>
+          </div>
+          <div class="staf-card">
+            <div class="staf-photo">
+              <img
+                src="img/profilguru.webp"
+                alt="Placeholder foto guru bimbingan konseling"
+              />
+            </div>
+            <div class="staf-info">
+              <div class="name">Sri Wahyuni, S.Pd.</div>
+              <div class="role">Guru BK</div>
+            </div>
+          </div>
+          <div class="staf-card">
+            <div class="staf-photo">
+              <img
+                src="img/profilguru.webp"
+                alt="Placeholder foto guru mata pelajaran"
+              />
+            </div>
+            <div class="staf-info">
+              <div class="name">Dedi Kurniawan, S.Pd.</div>
+              <div class="role">Guru Matematika</div>
+            </div>
+          </div>
+          <div class="staf-card">
+            <div class="staf-photo">
+              <img
+                src="img/profilguru.webp"
+                alt="Placeholder foto staf tata usaha"
+              />
+            </div>
+            <div class="staf-info">
+              <div class="name">Lestari Ningsih</div>
+              <div class="role">Staf Tata Usaha</div>
+            </div>
+          </div>
+          <div class="staf-card">
+            <div class="staf-photo">
+              <img
+                src="img/profilguru.webp"
+                alt="Placeholder foto staf tata usaha"
+              />
+            </div>
+            <div class="staf-info">
+              <div class="name">Lestari Ningsih</div>
+              <div class="role">Staf Tata Usaha</div>
+            </div>
+          </div>
+          <div class="staf-card">
+            <div class="staf-photo">
+              <img
+                src="img/profilguru.webp"
+                alt="Placeholder foto staf tata usaha"
+              />
+            </div>
+            <div class="staf-info">
+              <div class="name">Lestari Ningsih</div>
+              <div class="role">Staf Tata Usaha</div>
+            </div>
+          </div>
+          <div class="staf-card">
+            <div class="staf-photo">
+              <img
+                src="img/profilguru.webp"
+                alt="Placeholder foto staf tata usaha"
+              />
+            </div>
+            <div class="staf-info">
+              <div class="name">Lestari Ningsih</div>
+              <div class="role">Staf Tata Usaha</div>
+            </div>
+          </div>
+          <div class="staf-card">
+            <div class="staf-photo">
+              <img
+                src="img/profilguru.webp"
+                alt="Placeholder foto staf tata usaha"
+              />
+            </div>
+            <div class="staf-info">
+              <div class="name">Lestari Ningsih</div>
+              <div class="role">Staf Tata Usaha</div>
+            </div>
+          </div>
+          <div class="staf-card">
+            <div class="staf-photo">
+              <img
+                src="img/profilguru.webp"
+                alt="Placeholder foto staf tata usaha"
+              />
+            </div>
+            <div class="staf-info">
+              <div class="name">Lestari Ningsih</div>
+              <div class="role">Staf Tata Usaha</div>
+            </div>
+          </div>
+          <div class="staf-card">
+            <div class="staf-photo">
+              <img
+                src="img/profilguru.webp"
+                alt="Placeholder foto staf tata usaha"
+              />
+            </div>
+            <div class="staf-info">
+              <div class="name">Lestari Ningsih</div>
+              <div class="role">Staf Tata Usaha</div>
+            </div>
+          </div>
+        </div>
+
+        <p class="staf-hint">Geser ke samping untuk melihat staf lainnya.</p>
+      </div>
+    </section>
+
+    <section id="berita">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Berita &amp; Pengumuman</p>
+          <h2>Kabar terbaru dari sekolah</h2>
+        </div>
+        <div class="timeline">
+          <div class="t-item">
+            <div class="t-thumb">
+              <img
+                src="img/even1.webp"
+                alt="Placeholder gambar berita penilaian tengah semester"
+              />
+            </div>
+            <div class="t-body">
+              <div class="t-date">24 Agustus 2026</div>
+              <span class="tag">Akademik</span>
+              <h3>Perayaan dan pembagian hadiah kemerdekaan</h3>
+              <p>
+                Perayaan yang diikuti oleh seluruh siswa dalam menyambut hari
+                kemerdekaan indonesia dengan berbagai lomba dan pembagian
+                hadiah.
+              </p>
+            </div>
+          </div>
+          <div class="t-item">
+            <div class="t-thumb">
+              <img
+                src="img/even2.webp"
+                alt="Placeholder gambar prestasi lomba"
+              />
+            </div>
+            <div class="t-body">
+              <div class="t-date">15 Agustus 2026</div>
+              <span class="tag">Prestasi</span>
+              <h3>Sekolah mengadakan event turnamen volly antar sekolah</h3>
+              <p>
+                Sekolah mengadakan turnamen volly yang diikuti oleh banyak smp.
+              </p>
+            </div>
+          </div>
+          <div class="t-item">
+            <div class="t-thumb">
+              <img
+                src="img/even3.webp"
+                alt="Placeholder gambar orientasi siswa baru"
+              />
+            </div>
+            <div class="t-body">
+              <div class="t-date">2 Agustus 2026</div>
+              <span class="tag">Kegiatan</span>
+              <h3>Kelulusan dan pembagian penghargaan</h3>
+              <p>
+                Rangkaian kegiatan kelulusan sekolah bagi siswa kelas 12 yang
+                telah selesai dilaksanakan dengan lancar dan meriah.
+              </p>
+            </div>
+          </div>
+          <!-- <div class="t-item">
+            <div class="t-thumb">
+              <img
+                src="https://picsum.photos/seed/wl-berita4/300/220"
+                alt="Placeholder gambar pembagian kelas"
+              />
+            </div>
+            <div class="t-body">
+              <div class="t-date">20 Juli 2026</div>
+              <span class="tag">Pengumuman</span>
+              <h3>Pembagian Kelas Tahun Ajaran 2026/2027</h3>
+              <p>
+                Daftar pembagian kelas dan wali kelas untuk seluruh jenjang
+                telah tersedia dan dapat dilihat di papan pengumuman sekolah.
+              </p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </section>
+
+    <section id="galeri">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Galeri</p>
+          <h2>Sekilas suasana sekolah kami</h2>
+        </div>
+        <div class="galeri-grid">
+          <figure>
+            <img
+              src="img/Sekilas1.webp"
+              alt="Placeholder gambar suasana sekolah"
+            />
+          </figure>
+          <figure>
+            <img
+              src="img/Sekilas2.webp"
+              alt="Placeholder gambar kegiatan praktik"
+            />
+          </figure>
+          <figure>
+            <img
+              src="img/Sekilas3.webp"
+              alt="Placeholder gambar kegiatan siswa"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontak">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Kontak &amp; Lokasi</p>
+          <h2>Hubungi kami</h2>
+        </div>
+        <div class="kontak-grid">
+          <div class="kontak-image">
+            <img
+              src="img/hubungikami.webp"
+              alt="Placeholder gambar gedung sekolah"
+            />
+          </div>
+          <div>
+            <ul class="kontak-list">
+              <li>
+                <span class="k-label">Alamat</span
+                ><span
+                  >Kp/Desa Dunguswiru Kec. Bl. Limbangan Kab. Garut
+                  Indonesia</span
+                >
+              </li>
+              <li>
+                <span class="k-label">Telepon</span><span>(0262) xxx-xxx</span>
+              </li>
+              <li>
+                <span class="k-label">Email</span
+                ><span>info@wiragunalimbangan.sch.id</span>
+              </li>
+              <li>
+                <span class="k-label">Jam Layanan</span
+                ><span>Senin–Jumat, 07.00–14.00 WIB</span>
+              </li>
+            </ul>
+            <div class="map-box">
+              <p class="eyebrow">Lokasi</p>
+              <p style="margin-bottom: 1rem; color: #3a3a38">
+                Sekolah berada di jalur yang mudah diakses dari jalur angkutan
+                umum.
+              </p>
+              <a
+                class="btn btn-ghost"
+                href="https://www.google.com/maps/place/SMK+WIRAGUNA+LIMBANGAN/@-7.0268828,107.9929522,17z/data=!3m1!4b1!4m6!3m5!1s0x2e68cba8a5d9476b:0xa0b76dc02d1afa09!8m2!3d-7.0268881!4d107.9955271!16s%2Fg%2F11ckkyfvm8?entry=ttu&g_ep=EgoyMDI2MDgyNS4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener"
+                >Buka di Google Maps ↗</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tata-tertib">
+      <div class="wrap">
+        <div class="tatib">
+          <div class="tatib-image">
+            <img
+              src="img/tatib.webp"
+              alt="Placeholder gambar tata tertib sekolah"
+            />
+          </div>
+          <div>
+            <p class="eyebrow">Panduan Siswa</p>
+            <h2 style="color: var(--navy); font-size: 1.6rem">
+              Tata tertib sekolah
+            </h2>
+            <p>
+              Baca ketentuan lengkap mengenai kedisiplinan, seragam, dan aturan
+              kegiatan belajar mengajar di SMK Wiraguna Limbangan.
+            </p>
+            <a
+              class="btn btn-primary"
+              href="https://buatwr7-oss.github.io/Tatibsmkwilis/"
+              target="_blank"
+              rel="noopener"
+              >Lihat Tata Tertib ↗</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="footer-top">
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px">
+              <div class="brand-mark">
+                <img src="img/logo.png" alt="Logo SMK Wiraguna Limbangan" />
+              </div>
+              <span class="brand-name" style="font-size: 1.1rem"
+                >SMK Wiraguna Limbangan</span
+              >
+            </div>
+            <p style="max-width: 32ch; margin-top: 0.7rem; font-size: 0.88rem">
+              Kp/Desa Dunguswiru Kec. Bl. Limbangan Kab. Garut Indonesia
+            </p>
+          </div>
+          <div class="footer-links">
+            <div class="footer-col">
+              <h4>Navigasi</h4>
+              <a href="#profil">Profil</a>
+              <a href="#staf">Staf</a>
+              <a href="#berita">Berita</a>
+              <a href="#galeri">Galeri</a>
+              <a href="#kontak">Kontak</a>
+            </div>
+            <div class="footer-col">
+              <h4>Tautan</h4>
+              <a
+                href="https://contoh-ppdb.sekolah.id"
+                target="_blank"
+                rel="noopener"
+                >PPDB Online ↗</a
+              >
+              <a
+                href="https://buatwr7-oss.github.io/Tatibsmkwilis/"
+                target="_blank"
+                rel="noopener"
+                >Tata Tertib ↗</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span
+            >© 2026 SMK Wiraguna Limbangan. Seluruh hak cipta dilindungi.</span
+          >
+          <!-- <span>Dibuat dengan Claude</span> -->
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const navToggle = document.getElementById("navToggle");
+      const navLinks = document.getElementById("navLinks");
+      navToggle.addEventListener("click", () =>
+        navLinks.classList.toggle("open"),
+      );
+      navLinks
+        .querySelectorAll("a")
+        .forEach((a) =>
+          a.addEventListener("click", () => navLinks.classList.remove("open")),
+        );
+    </script>
+  </body>
+</html>
