@@ -390,7 +390,7 @@
         font-family: "IBM Plex Mono", monospace;
         font-size: 0.85rem;
         color: var(--sage);
-        padding: 1rem 0 1rem 2rem;
+        padding: 1rem 0;
       }
       @media (max-width: 700px) {
         .t-item {
@@ -404,21 +404,24 @@
         }
       }
 
-      /* ---------- STAF ---------- */
+      /* ---------- STAF (Dibuat tepat 4 kolom per baris di desktop) ---------- */
       .staf-scroll {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-        gap: 1rem;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.2rem;
       }
       .staf-card {
         background: var(--white);
         border: 1px solid var(--line);
         border-radius: 4px;
         overflow: hidden;
+        display: flex;
+        flex-direction: column; /* Menjaga tinggi kartu seragam dan sejajar */
       }
       .staf-photo {
         aspect-ratio: 4/3;
         background: #e5e2d8;
+        flex-shrink: 0;
       }
       .staf-photo img {
         width: 100%;
@@ -427,10 +430,14 @@
       }
       .staf-info {
         padding: 0.9rem 1rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1; /* Mengisi sisa ruang secara fleksibel */
+        justify-content: space-between; /* Menjaga posisi teks bawah tetap sejajar rata */
       }
       .staf-info .name {
         font-family: "Fraunces", serif;
-        font-size: 0.95rem;
+        font-size: 15px; /* Ukuran pas untuk nama panjang maupun pendek */
         color: var(--navy);
         line-height: 1.25;
       }
@@ -440,7 +447,7 @@
         text-transform: uppercase;
         letter-spacing: 0.05em;
         color: var(--sage);
-        margin-top: 5px;
+        margin-top: 8px;
       }
       .staf-hint {
         display: none;
@@ -449,7 +456,13 @@
         margin-top: 0.8rem;
       }
 
-      @media (max-width: 700px) {
+      @media (max-width: 900px) {
+        .staf-scroll {
+          grid-template-columns: repeat(2, 1fr); /* 2 kolom untuk tablet */
+        }
+      }
+
+      @media (max-width: 600px) {
         .staf-scroll {
           display: flex;
           overflow-x: auto;
@@ -794,43 +807,8 @@
           <h2>Tenaga pendidik dan kependidikan</h2>
         </div>
         <div class="staf-scroll" id="stafContainer">
-          <!-- Item statis / fallback -->
-          <div class="staf-card">
-            <div class="staf-photo">
-              <img src="img/profilguru.webp" alt="Kepala Sekolah" />
-            </div>
-            <div class="staf-info">
-              <div class="name">Drs. Agus Setiawan</div>
-              <div class="role">Kepala Sekolah</div>
-            </div>
-          </div>
-          <div class="staf-card">
-            <div class="staf-photo">
-              <img src="img/profilguru.webp" alt="Wakil Kepala Sekolah" />
-            </div>
-            <div class="staf-info">
-              <div class="name">Rina Marlina, S.Pd.</div>
-              <div class="role">Wakil Kepala Sekolah</div>
-            </div>
-          </div>
-          <div class="staf-card">
-            <div class="staf-photo">
-              <img src="img/profilguru.webp" alt="Guru Produktif" />
-            </div>
-            <div class="staf-info">
-              <div class="name">Budi Hartono, S.T.</div>
-              <div class="role">Guru Produktif</div>
-            </div>
-          </div>
-          <div class="staf-card">
-            <div class="staf-photo">
-              <img src="img/profilguru.webp" alt="Guru BK" />
-            </div>
-            <div class="staf-info">
-              <div class="name">Sri Wahyuni, S.Pd.</div>
-              <div class="role">Guru BK</div>
-            </div>
-          </div>
+          <!-- Indikator Loading awal sebelum data masuk dari Google Sheets -->
+          <div class="loading-msg">Memuat data staf dari server...</div>
         </div>
         <p class="staf-hint">Geser ke samping untuk melihat staf lainnya.</p>
       </div>
@@ -1156,6 +1134,7 @@
           }
         } catch (error) {
           console.error("Gagal memuat data staf:", error);
+          stafContainer.innerHTML = `<p class="loading-msg" style="color: #b03a2e;">Gagal memuat data staf.</p>`;
         }
       }
 
