@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SMK Wiraguna Limbangan</title>
+
+    <!-- Meta Tag Open Graph untuk Pratinjau Media Sosial / WhatsApp -->
+    <meta property="og:title" content="SMK Wiraguna Limbangan" />
+    <meta
+      property="og:description"
+      content="Website resmi SMK Wiraguna Limbangan. Tumbuh berprestasi, berkarakter, dan siap melangkah lebih jauh."
+    />
+    <meta property="og:image" content="img/logo.png" />
+    <meta property="og:type" content="website" />
+
     <link rel="icon" type="image/png" href="img/logo.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -309,7 +319,7 @@
         position: relative;
         padding: 0 0 2.2rem 2rem;
         display: flex;
-        gap: 1.2rem;
+        gap: 1.5rem;
       }
       .t-item:last-child {
         padding-bottom: 0;
@@ -326,17 +336,18 @@
         border: 2px solid var(--parchment);
       }
       .t-thumb {
-        flex: 0 0 108px;
-        width: 108px;
-        height: 84px;
-        border-radius: 4px;
+        flex: 0 0 220px;
+        aspect-ratio: 16 / 9;
+        border-radius: 6px;
         overflow: hidden;
         background: #e5e2d8;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
       }
       .t-thumb img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        display: block;
       }
       .t-body {
         flex: 1;
@@ -349,7 +360,7 @@
         margin-bottom: 0.4rem;
       }
       .t-item h3 {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
         color: var(--navy);
         margin-bottom: 0.35rem;
       }
@@ -370,13 +381,21 @@
         border-radius: 2px;
         margin-bottom: 0.5rem;
       }
-      @media (max-width: 600px) {
+      .loading-msg {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.85rem;
+        color: var(--sage);
+        padding: 1rem 0 1rem 2rem;
+      }
+      @media (max-width: 700px) {
         .t-item {
           flex-direction: column;
+          gap: 1rem;
         }
         .t-thumb {
           width: 100%;
-          height: 150px;
+          flex: none;
+          aspect-ratio: 16 / 9;
         }
       }
 
@@ -704,7 +723,6 @@
             src="img/utama.webp"
             alt="Placeholder gambar siswa dan lingkungan sekolah"
           />
-          <!-- <div class="img-caption">Ganti dengan foto sekolah asli</div> -->
         </div>
       </div>
     </section>
@@ -763,19 +781,18 @@
       </div>
     </section>
 
+    <!-- SECTION STAF DINAMIS DARI GOOGLE SHEETS -->
     <section id="staf">
       <div class="wrap">
         <div class="section-head">
           <p class="eyebrow">Para Staf</p>
           <h2>Tenaga pendidik dan kependidikan</h2>
         </div>
-        <div class="staf-scroll">
+        <div class="staf-scroll" id="stafContainer">
+          <!-- Item statis / fallback -->
           <div class="staf-card">
             <div class="staf-photo">
-              <img
-                src="img/profilguru.webp"
-                alt="Placeholder foto Kepala Sekolah"
-              />
+              <img src="img/profilguru.webp" alt="Kepala Sekolah" />
             </div>
             <div class="staf-info">
               <div class="name">Drs. Agus Setiawan</div>
@@ -784,10 +801,7 @@
           </div>
           <div class="staf-card">
             <div class="staf-photo">
-              <img
-                src="img/profilguru.webp"
-                alt="Placeholder foto Wakil Kepala Sekolah"
-              />
+              <img src="img/profilguru.webp" alt="Wakil Kepala Sekolah" />
             </div>
             <div class="staf-info">
               <div class="name">Rina Marlina, S.Pd.</div>
@@ -796,10 +810,7 @@
           </div>
           <div class="staf-card">
             <div class="staf-photo">
-              <img
-                src="img/profilguru.webp"
-                alt="Placeholder foto guru produktif"
-              />
+              <img src="img/profilguru.webp" alt="Guru Produktif" />
             </div>
             <div class="staf-info">
               <div class="name">Budi Hartono, S.T.</div>
@@ -808,193 +819,28 @@
           </div>
           <div class="staf-card">
             <div class="staf-photo">
-              <img
-                src="img/profilguru.webp"
-                alt="Placeholder foto guru bimbingan konseling"
-              />
+              <img src="img/profilguru.webp" alt="Guru BK" />
             </div>
             <div class="staf-info">
               <div class="name">Sri Wahyuni, S.Pd.</div>
               <div class="role">Guru BK</div>
             </div>
           </div>
-          <div class="staf-card">
-            <div class="staf-photo">
-              <img
-                src="img/profilguru.webp"
-                alt="Placeholder foto guru mata pelajaran"
-              />
-            </div>
-            <div class="staf-info">
-              <div class="name">Dedi Kurniawan, S.Pd.</div>
-              <div class="role">Guru Matematika</div>
-            </div>
-          </div>
-          <div class="staf-card">
-            <div class="staf-photo">
-              <img
-                src="img/profilguru.webp"
-                alt="Placeholder foto staf tata usaha"
-              />
-            </div>
-            <div class="staf-info">
-              <div class="name">Lestari Ningsih</div>
-              <div class="role">Staf Tata Usaha</div>
-            </div>
-          </div>
-          <div class="staf-card">
-            <div class="staf-photo">
-              <img
-                src="img/profilguru.webp"
-                alt="Placeholder foto staf tata usaha"
-              />
-            </div>
-            <div class="staf-info">
-              <div class="name">Lestari Ningsih</div>
-              <div class="role">Staf Tata Usaha</div>
-            </div>
-          </div>
-          <div class="staf-card">
-            <div class="staf-photo">
-              <img
-                src="img/profilguru.webp"
-                alt="Placeholder foto staf tata usaha"
-              />
-            </div>
-            <div class="staf-info">
-              <div class="name">Lestari Ningsih</div>
-              <div class="role">Staf Tata Usaha</div>
-            </div>
-          </div>
-          <div class="staf-card">
-            <div class="staf-photo">
-              <img
-                src="img/profilguru.webp"
-                alt="Placeholder foto staf tata usaha"
-              />
-            </div>
-            <div class="staf-info">
-              <div class="name">Lestari Ningsih</div>
-              <div class="role">Staf Tata Usaha</div>
-            </div>
-          </div>
-          <div class="staf-card">
-            <div class="staf-photo">
-              <img
-                src="img/profilguru.webp"
-                alt="Placeholder foto staf tata usaha"
-              />
-            </div>
-            <div class="staf-info">
-              <div class="name">Lestari Ningsih</div>
-              <div class="role">Staf Tata Usaha</div>
-            </div>
-          </div>
-          <div class="staf-card">
-            <div class="staf-photo">
-              <img
-                src="img/profilguru.webp"
-                alt="Placeholder foto staf tata usaha"
-              />
-            </div>
-            <div class="staf-info">
-              <div class="name">Lestari Ningsih</div>
-              <div class="role">Staf Tata Usaha</div>
-            </div>
-          </div>
-          <div class="staf-card">
-            <div class="staf-photo">
-              <img
-                src="img/profilguru.webp"
-                alt="Placeholder foto staf tata usaha"
-              />
-            </div>
-            <div class="staf-info">
-              <div class="name">Lestari Ningsih</div>
-              <div class="role">Staf Tata Usaha</div>
-            </div>
-          </div>
         </div>
-
         <p class="staf-hint">Geser ke samping untuk melihat staf lainnya.</p>
       </div>
     </section>
 
+    <!-- SECTION BERITA DENGAN INDIKATOR LOADING -->
     <section id="berita">
       <div class="wrap">
         <div class="section-head">
           <p class="eyebrow">Berita &amp; Pengumuman</p>
           <h2>Kabar terbaru dari sekolah</h2>
         </div>
-        <div class="timeline">
-          <div class="t-item">
-            <div class="t-thumb">
-              <img
-                src="img/even1.webp"
-                alt="Placeholder gambar berita penilaian tengah semester"
-              />
-            </div>
-            <div class="t-body">
-              <div class="t-date">24 Agustus 2026</div>
-              <span class="tag">Akademik</span>
-              <h3>Perayaan dan pembagian hadiah kemerdekaan</h3>
-              <p>
-                Perayaan yang diikuti oleh seluruh siswa dalam menyambut hari
-                kemerdekaan indonesia dengan berbagai lomba dan pembagian
-                hadiah.
-              </p>
-            </div>
-          </div>
-          <div class="t-item">
-            <div class="t-thumb">
-              <img
-                src="img/even2.webp"
-                alt="Placeholder gambar prestasi lomba"
-              />
-            </div>
-            <div class="t-body">
-              <div class="t-date">15 Agustus 2026</div>
-              <span class="tag">Prestasi</span>
-              <h3>Sekolah mengadakan event turnamen volly antar sekolah</h3>
-              <p>
-                Sekolah mengadakan turnamen volly yang diikuti oleh banyak smp.
-              </p>
-            </div>
-          </div>
-          <div class="t-item">
-            <div class="t-thumb">
-              <img
-                src="img/even3.webp"
-                alt="Placeholder gambar orientasi siswa baru"
-              />
-            </div>
-            <div class="t-body">
-              <div class="t-date">2 Agustus 2026</div>
-              <span class="tag">Kegiatan</span>
-              <h3>Kelulusan dan pembagian penghargaan</h3>
-              <p>
-                Rangkaian kegiatan kelulusan sekolah bagi siswa kelas 12 yang
-                telah selesai dilaksanakan dengan lancar dan meriah.
-              </p>
-            </div>
-          </div>
-          <!-- <div class="t-item">
-            <div class="t-thumb">
-              <img
-                src="https://picsum.photos/seed/wl-berita4/300/220"
-                alt="Placeholder gambar pembagian kelas"
-              />
-            </div>
-            <div class="t-body">
-              <div class="t-date">20 Juli 2026</div>
-              <span class="tag">Pengumuman</span>
-              <h3>Pembagian Kelas Tahun Ajaran 2026/2027</h3>
-              <p>
-                Daftar pembagian kelas dan wali kelas untuk seluruh jenjang
-                telah tersedia dan dapat dilihat di papan pengumuman sekolah.
-              </p>
-            </div>
-          </div> -->
+        <div class="timeline" id="timelineContainer">
+          <!-- Indikator Loading awal sebelum data masuk -->
+          <div class="loading-msg">Memuat berita terbaru dari server...</div>
         </div>
       </div>
     </section>
@@ -1157,7 +1003,6 @@
           <span
             >© 2026 SMK Wiraguna Limbangan. Seluruh hak cipta dilindungi.</span
           >
-          <!-- <span>Dibuat dengan Claude</span> -->
         </div>
       </div>
     </footer>
@@ -1173,6 +1018,144 @@
         .forEach((a) =>
           a.addEventListener("click", () => navLinks.classList.remove("open")),
         );
+
+      // --- SCRIPT OTOMATIS LOAD BERITA DARI GOOGLE SHEETS ---
+      const GOOGLE_SHEET_CSV_URL =
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQMApRzQ34mN4Ck_TRpTIxV9GeRMBQqDKnrGopg_hWOtOHmFNUXOKFhFeMcUju03WMUzs1kf8kK3rtO/pub?gid=0&single=true&output=csv";
+
+      // --- SCRIPT OTOMATIS LOAD STAF/GURU DARI GOOGLE SHEETS ---
+      const GOOGLE_SHEET_STAF_URL =
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vT_uWHfbZ6et8TrhzUpfkyjE0ZOo6ssZeh6M96vhSarqj7n6cRs3ifukithCU0X1b9XrH3YBVEIcgTO/pub?gid=0&single=true&output=csv";
+
+      async function loadBeritaFromSheet() {
+        const container = document.getElementById("timelineContainer");
+        if (
+          !GOOGLE_SHEET_CSV_URL ||
+          GOOGLE_SHEET_CSV_URL.includes("MASUKKAN_LINK")
+        ) {
+          return;
+        }
+
+        try {
+          const response = await fetch(GOOGLE_SHEET_CSV_URL);
+          const data = await response.text();
+          const rows = data.split("\n");
+
+          if (rows.length > 1) {
+            container.innerHTML = ""; // Kosongkan indikator loading
+
+            for (let i = 1; i < rows.length; i++) {
+              let rowText = rows[i].trim();
+              if (!rowText) continue;
+
+              let cols = [];
+              let current = "";
+              let inQuotes = false;
+              for (let c = 0; c < rowText.length; c++) {
+                let char = rowText[c];
+                if (char === '"') {
+                  inQuotes = !inQuotes;
+                } else if (char === "," && !inQuotes) {
+                  cols.push(current.trim().replace(/^"|"$/g, ""));
+                  current = "";
+                } else {
+                  current += char;
+                }
+              }
+              cols.push(current.trim().replace(/^"|"$/g, ""));
+
+              if (cols.length >= 5) {
+                const tanggal = cols[0];
+                const kategori = cols[1];
+                const judul = cols[2];
+                const deskripsi = cols[3];
+                const gambar = cols[4];
+
+                const itemHTML = `
+                  <div class="t-item">
+                    <div class="t-thumb">
+                      <img src="${gambar}" alt="${judul}" />
+                    </div>
+                    <div class="t-body">
+                      <div class="t-date">${tanggal}</div>
+                      <span class="tag">${kategori}</span>
+                      <h3>${judul}</h3>
+                      <p>${deskripsi}</p>
+                    </div>
+                  </div>
+                `;
+                container.innerHTML += itemHTML;
+              }
+            }
+          }
+        } catch (error) {
+          console.error("Gagal memuat berita:", error);
+          container.innerHTML = `<p class="loading-msg" style="color: #b03a2e;">Gagal memuat data berita terbaru.</p>`;
+        }
+      }
+
+      async function loadStafFromSheet() {
+        if (!GOOGLE_SHEET_STAF_URL || GOOGLE_SHEET_STAF_URL.trim() === "") {
+          return;
+        }
+
+        const stafContainer = document.getElementById("stafContainer");
+        try {
+          const response = await fetch(GOOGLE_SHEET_STAF_URL);
+          const data = await response.text();
+          const rows = data.split("\n");
+
+          if (rows.length > 1) {
+            stafContainer.innerHTML = "";
+            for (let i = 1; i < rows.length; i++) {
+              let rowText = rows[i].trim();
+              if (!rowText) continue;
+
+              let cols = [];
+              let current = "";
+              let inQuotes = false;
+              for (let c = 0; c < rowText.length; c++) {
+                let char = rowText[c];
+                if (char === '"') {
+                  inQuotes = !inQuotes;
+                } else if (char === "," && !inQuotes) {
+                  cols.push(current.trim().replace(/^"|"$/g, ""));
+                  current = "";
+                } else {
+                  current += char;
+                }
+              }
+              cols.push(current.trim().replace(/^"|"$/g, ""));
+
+              if (cols.length >= 2) {
+                const nama = cols[0];
+                const role = cols[1];
+                // Jika kolom foto (kolom ke-3) kosong, otomatis gunakan foto default lokal
+                const foto =
+                  cols[2] && cols[2].trim() !== ""
+                    ? cols[2]
+                    : "img/profilguru.webp";
+
+                const stafHTML = `
+                  <div class="staf-card">
+                    <div class="staf-photo"><img src="${foto}" alt="${nama}" /></div>
+                    <div class="staf-info">
+                      <div class="name">${nama}</div>
+                      <div class="role">${role}</div>
+                    </div>
+                  </div>
+                `;
+                stafContainer.innerHTML += stafHTML;
+              }
+            }
+          }
+        } catch (error) {
+          console.error("Gagal memuat data staf:", error);
+        }
+      }
+
+      loadBeritaFromSheet();
+      loadStafFromSheet();
     </script>
   </body>
 </html>
