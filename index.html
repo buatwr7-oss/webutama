@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Maintenance - Wili's</title>
+    <!-- Import Font Pixel dari Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0d0e15;
+            color: #ffffff;
+            font-family: 'Press Start 2P', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+            background-image: 
+                radial-gradient(circle, #25283d 10%, transparent 10%),
+                radial-gradient(circle, #1a1c29 10%, transparent 10%);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+
+        /* Wadah Partikel Berterbangan */
+        #particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            opacity: 0;
+            animation: flyParticle linear infinite;
+            will-change: transform, opacity;
+        }
+
+        @keyframes flyParticle {
+            0% {
+                transform: translateY(105vh) translateX(0);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.8;
+            }
+            85% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(40px);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 650px;
+            background: #181a24;
+            border: 4px solid #fff;
+            box-shadow: 8px 8px 0px #000000;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            margin: 20px;
+        }
+
+        .pixel-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-8px); }
+        }
+
+        h1 {
+            font-size: 15px;
+            color: #ffcc00;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-shadow: 3px 3px #000;
+        }
+
+        .dialogue-box {
+            background: #0f1017;
+            border: 2px dashed #4b5263;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: left;
+            font-size: 9.5px;
+            line-height: 2.2;
+            color: #a0aec0;
+            min-height: 140px;
+        }
+
+        #npc-text {
+            transition: opacity 0.5s ease;
+            opacity: 1;
+        }
+
+        .dialogue-box span {
+            color: #00ffcc;
+        }
+
+        .status-container {
+            margin-bottom: 20px;
+        }
+
+        .status-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 9px;
+            margin-bottom: 8px;
+            color: #ff77ff;
+        }
+
+        .progress-bar-frame {
+            background: #000;
+            border: 3px solid #fff;
+            height: 24px;
+            padding: 2px;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #00aa00, #00ff55);
+            height: 100%;
+            width: 78%;
+        }
+
+        .footer-text {
+            margin-top: 20px;
+            font-size: 8px;
+            color: #6b7280;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+                border-width: 3px;
+                box-shadow: 4px 4px 0px #000;
+            }
+            h1 {
+                font-size: 11.5px;
+            }
+            .dialogue-box {
+                font-size: 8px;
+                padding: 15px;
+                line-height: 1.9;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Wadah Partikel Berterbangan -->
+    <div id="particles-container"></div>
+
+    <div class="container">
+        <div class="pixel-icon">🛡️⚔️</div>
+
+        <h1>AREA TERKUNCI (MAINTENANCE)</h1>    
+        <h1>Silahkan kembali beberapa saat lagi</h1>
+        
+
+        <!-- Kotak Dialog Pembimbing Guild -->
+        <div class="dialogue-box" id="dialogue-box">
+            <p><strong>[Hai Para Petualang!]:</strong></p>
+            <p id="npc-text">Selamat datang kembali, Guru-gurumu di sekolah sangat bangga dan selalu rindu melihat semangat belajarmu hari ini.</p>
+            <br>
+            <p>> Estimasi Selesai: <span>Segera</span></p>
+            <p>> Status: <span id="status-text">Pembaruan Sistem & Arsip Pengetahuan</span></p>
+        </div>
+
+        <div class="status-container">
+            <div class="status-label">
+                <span>REPAIR PROGRESS</span>
+                <span id="progress-text">78%</span>
+            </div>
+            <div class="progress-bar-frame">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+        </div>
+
+        <div class="footer-text">
+            &copy; 2026 Wili's Engine. All rights reserved.
+        </div>
+    </div>
+
+    <script>
+        // 1. Partikel Berterbangan
+        const particleContainer = document.getElementById('particles-container');
+        const particleCount = window.innerWidth < 480 ? 20 : 35;
+        const colors = ['#ffcc00', '#00ffcc', '#ff77ff', '#ffffff', '#ff4444'];
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            const size = Math.random() > 0.5 ? 4 : 5;
+            const posX = Math.random() * 100;
+            const duration = 5 + Math.random() * 5;
+            const delay = Math.random() * 5;
+            const color = colors[Math.floor(Math.random() * colors.length)];
+
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${posX}%`;
+            particle.style.background = color;
+            particle.style.boxShadow = `0 0 6px ${color}`;
+            particle.style.animationDuration = `${duration}s`;
+            particle.style.animationDelay = `${delay}s`;
+
+            particleContainer.appendChild(particle);
+        }
+
+        // 2. Rotasi 10 Pesan Motivasi & Fakta Ilmu Pengetahuan (Durasi: 30 Detik)
+        const npcQuotes = [
+            "Selamat datang, Petualang! Guru-gurumu di sekolah sangat bangga dan selalu rindu melihat semangat belajarmu hari ini.",
+            "Fakta Sains: Cahaya matahari membutuhkan waktu sekitar 8 menit 20 detik untuk sampai ke bumi dan memberi energi pada kehidupan.",
+            "Setiap latihan soal yang kamu kerjakan adalah peningkatan pengalaman yang nyata untuk mempertajam kecerdasan otak kita!",
+            "Bapak dan Ibu Guru selalu tulus mendoakan keberhasilanmu. Jadilah Petualang Muda yang bangga dengan setiap tahapan proses belajarnya!",
+            "Fakta Matematika: Angka nol (0) ditemukan pertama kali oleh matematikawan hebat asal India bernama Aryabhata.",
+            "Kegigihanmu belajar hari ini adalah senjata terbaik untuk menaklukkan tantangan terbesar di masa depan. Teruslah melangkah!",
+            "Fakta Bahasa: Bahasa Indonesia memiliki ribuan kata serapan unik yang berasal dari berbagai bahasa di dunia.",
+            "Jangan pernah takut salah saat menjawab soal. Di dalam dunia pendidikan, kegagalan hanyalah proses mengumpulkan poin pengalaman!",
+            "Fakta Geografi: Indonesia adalah negara kepulauan terbesar di dunia dengan lebih dari 17.000 pulau yang terbentang indah.",
+            "Istirahatlah sejenak untuk memulihkan energi, lalu bersiaplah kembali untuk menuntut ilmu bersama teman-temanmu!"
+        ];
+
+        let quoteIndex = 0;
+        const textElement = document.getElementById('npc-text');
+
+        setInterval(() => {
+            quoteIndex = (quoteIndex + 1) % npcQuotes.length;
+            textElement.style.opacity = 0;
+            setTimeout(() => {
+                textElement.textContent = npcQuotes[quoteIndex];
+                textElement.style.opacity = 1;
+            }, 500);
+        }, 20000);
+    </script>
+</body>
+</html>
