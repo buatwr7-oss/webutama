@@ -315,6 +315,50 @@
         }
       }
 
+      /* ---------- UNGGULAN (DKV & VOLLY) ---------- */
+      .unggulan-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+      .unggulan-card {
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .unggulan-img {
+        aspect-ratio: 16 / 9;
+        background: #e5e2d8;
+      }
+      .unggulan-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .unggulan-content {
+        padding: 1.6rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .unggulan-content h3 {
+        font-size: 1.25rem;
+        color: var(--navy);
+        margin: 0.4rem 0 0.8rem;
+      }
+      .unggulan-content p {
+        color: #3a3a38;
+        font-size: 0.95rem;
+      }
+      @media (max-width: 860px) {
+        .unggulan-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
       /* ---------- BERITA (signature timeline with thumbnails) ---------- */
       .timeline {
         border-left: 2px solid var(--line);
@@ -702,6 +746,7 @@
         <div class="nav-links" id="navLinks">
           <a href="#beranda">Beranda</a>
           <a href="#profil">Profil</a>
+          <a href="#unggulan">Unggulan</a>
           <a href="#staf">Staf</a>
           <a href="#berita">Berita</a>
           <a href="#galeri">Galeri</a>
@@ -792,6 +837,55 @@
                 Menyelenggarakan pembelajaran berbasis kompetensi, membina
                 karakter melalui keteladanan, serta membuka ruang bagi setiap
                 siswa untuk mengembangkan potensinya.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION BIDANG UNGGULAN (DKV & VOLLY) -->
+    <section id="unggulan">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Keunggulan Sekolah</p>
+          <h2>Fokus keahlian dan prestasi pilihan</h2>
+        </div>
+        <div class="unggulan-grid">
+          <!-- Kartu DKV -->
+          <div class="unggulan-card">
+            <div class="unggulan-img">
+              <img
+                src="img/dkv.webp"
+                alt="Desain Komunikasi Visual SMK Wiraguna"
+              />
+            </div>
+            <div class="unggulan-content">
+              <span class="tag">Kompetensi Keahlian</span>
+              <h3>Desain Komunikasi Visual (DKV)</h3>
+              <p>
+                Program keahlian yang membekali siswa dengan kemampuan desain
+                grafis, multimedia, fotografi, dan videografi, siap menghadapi
+                industri kreatif digital modern.
+              </p>
+            </div>
+          </div>
+
+          <!-- Kartu Volly -->
+          <div class="unggulan-card">
+            <div class="unggulan-img">
+              <img
+                src="img/volly.webp"
+                alt="Ekstrakurikuler Bola Voli SMK Wiraguna"
+              />
+            </div>
+            <div class="unggulan-content">
+              <span class="tag">Ekstrakurikuler &amp; Prestasi</span>
+              <h3>Tim Bola Voli Unggulan</h3>
+              <p>
+                Wadah pengembangan bakat olahraga yang menjunjung tinggi
+                sportivitas, disiplin, dan kekompakan tim, serta rutin
+                menorehkan prestasi di berbagai ajang kompetisi.
               </p>
             </div>
           </div>
@@ -960,6 +1054,7 @@
             <div class="footer-col">
               <h4>Navigasi</h4>
               <a href="#profil">Profil</a>
+              <a href="#unggulan">Unggulan</a>
               <a href="#staf">Staf</a>
               <a href="#berita">Berita</a>
               <a href="#galeri">Galeri</a>
