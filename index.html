@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#3e5074" />
     <title>SMK Wiraguna Limbangan</title>
 
     <meta
@@ -10,7 +11,7 @@
       content="Website resmi SMK Wiraguna Limbangan. Tumbuh berprestasi, berkarakter, dan siap melangkah lebih jauh."
     />
 
-    <!-- Meta Tag Open Graph untuk Pratinjau Media Sosial / WhatsApp -->
+    <!-- Open Graph untuk pratinjau WhatsApp / media sosial -->
     <meta property="og:title" content="SMK Wiraguna Limbangan" />
     <meta
       property="og:description"
@@ -23,18 +24,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
         --navy: #3e5074;
+        --navy-dark: #2c3a56;
         --parchment: #f5f3ed;
         --amber: #f2c511;
-        --sage: #5b6e93;
+        --sage: #4d6089;
         --ink: #1b1b1b;
+        --text: #34342f;
         --line: #dbd8cf;
         --white: #ffffff;
+        --radius: 10px;
+        --shadow: 0 4px 18px rgba(30, 40, 65, 0.08);
       }
       * {
         box-sizing: border-box;
@@ -43,12 +48,14 @@
       }
       html {
         scroll-behavior: smooth;
+        scroll-padding-top: 84px;
       }
       body {
         background: var(--parchment);
         color: var(--ink);
         font-family: "Inter", sans-serif;
-        line-height: 1.6;
+        font-size: 17px;
+        line-height: 1.7;
       }
       h1,
       h2,
@@ -59,17 +66,23 @@
       }
       .eyebrow {
         font-family: "IBM Plex Mono", monospace;
-        font-size: 0.75rem;
+        font-size: 0.78rem;
         text-transform: uppercase;
         letter-spacing: 0.12em;
         color: var(--sage);
+        font-weight: 500;
       }
       a {
         color: inherit;
         text-decoration: none;
       }
+      a:focus-visible,
+      button:focus-visible {
+        outline: 3px solid var(--amber);
+        outline-offset: 3px;
+      }
       .wrap {
-        max-width: 1100px;
+        max-width: 1120px;
         margin: 0 auto;
         padding: 0 1.5rem;
       }
@@ -77,14 +90,27 @@
         display: block;
         max-width: 100%;
       }
+      .skip-link {
+        position: absolute;
+        left: -999px;
+        top: 8px;
+        background: var(--navy);
+        color: #fff;
+        padding: 8px 14px;
+        border-radius: 6px;
+        z-index: 100;
+      }
+      .skip-link:focus {
+        left: 8px;
+      }
 
       /* ---------- NAV ---------- */
       header {
         position: sticky;
         top: 0;
         z-index: 50;
-        background: rgba(247, 244, 238, 0.92);
-        backdrop-filter: blur(6px);
+        background: rgba(245, 243, 237, 0.94);
+        backdrop-filter: blur(8px);
         border-bottom: 1px solid var(--line);
       }
       nav.wrap {
@@ -92,6 +118,7 @@
         align-items: center;
         justify-content: space-between;
         height: 72px;
+        gap: 1rem;
       }
       .brand {
         display: flex;
@@ -99,14 +126,11 @@
         gap: 10px;
       }
       .brand-mark {
-        width: 36px;
-        height: 36px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         overflow: hidden;
         flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
       }
       .brand-mark img {
         width: 100%;
@@ -117,37 +141,58 @@
         font-family: "Fraunces", serif;
         font-weight: 600;
         font-size: 1.05rem;
+        line-height: 1.2;
       }
       .nav-links {
         display: flex;
         align-items: center;
-        gap: 1.6rem;
-        font-size: 0.9rem;
+        gap: 1.4rem;
+        font-size: 0.92rem;
       }
-      .nav-links a {
+      .nav-links a:not(.nav-cta) {
         position: relative;
-        padding: 4px 0;
-        color: var(--ink);
+        padding: 6px 0;
+        font-weight: 500;
       }
-      .nav-links a:hover {
+      .nav-links a:not(.nav-cta)::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: 0;
+        background: var(--amber);
+        transition: width 0.25s ease;
+      }
+      .nav-links a:not(.nav-cta):hover::after,
+      .nav-links a.active::after {
+        width: 100%;
+      }
+      .nav-links a.active {
         color: var(--navy);
       }
-      .nav-links a.external {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        color: var(--sage);
+      .nav-cta {
+        background: var(--amber);
+        color: var(--ink);
+        padding: 8px 16px;
+        border-radius: 999px;
+        font-weight: 600;
+      }
+      .nav-cta:hover {
+        background: #e0b50a;
       }
       .nav-toggle {
         display: none;
         background: none;
-        border: none;
-        font-size: 1.5rem;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        width: 44px;
+        height: 44px;
+        font-size: 1.4rem;
         cursor: pointer;
         color: var(--navy);
       }
-
-      @media (max-width: 860px) {
+      @media (max-width: 960px) {
         .nav-links {
           position: absolute;
           top: 72px;
@@ -156,10 +201,12 @@
           background: var(--parchment);
           flex-direction: column;
           align-items: flex-start;
-          padding: 1rem 1.5rem 1.5rem;
+          padding: 1.2rem 1.5rem 1.6rem;
           gap: 1rem;
           border-bottom: 1px solid var(--line);
+          box-shadow: var(--shadow);
           display: none;
+          font-size: 1rem;
         }
         .nav-links.open {
           display: flex;
@@ -169,54 +216,27 @@
         }
       }
 
-      /* ---------- HERO ---------- */
-      .hero {
-        padding: 4.5rem 0 4.5rem;
-        border-bottom: 1px solid var(--line);
-      }
-      .hero-grid {
-        display: grid;
-        grid-template-columns: 1.05fr 0.95fr;
-        gap: 3rem;
-        align-items: center;
-      }
-      .hero .eyebrow {
-        margin-bottom: 1rem;
-      }
-      .hero h1 {
-        font-size: clamp(2.1rem, 4.2vw, 3.2rem);
-        line-height: 1.1;
-      }
-      .hero p.lead {
-        margin-top: 1.3rem;
-        max-width: 46ch;
-        font-size: 1.05rem;
-        color: #3a3a38;
-      }
-      .hero-actions {
-        margin-top: 2rem;
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-      }
+      /* ---------- BUTTON ---------- */
       .btn {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        padding: 0.75rem 1.4rem;
-        border-radius: 2px;
-        font-size: 0.92rem;
-        font-weight: 500;
+        padding: 0.85rem 1.5rem;
+        border-radius: 999px;
+        font-size: 0.95rem;
+        font-weight: 600;
         font-family: "Inter", sans-serif;
-        border: 1px solid transparent;
+        border: 1.5px solid transparent;
         cursor: pointer;
+        transition: all 0.2s ease;
       }
       .btn-primary {
         background: var(--navy);
-        color: var(--parchment);
+        color: #fff;
       }
       .btn-primary:hover {
-        background: #2c3a56;
+        background: var(--navy-dark);
+        transform: translateY(-1px);
       }
       .btn-ghost {
         border-color: var(--navy);
@@ -224,73 +244,219 @@
       }
       .btn-ghost:hover {
         background: var(--navy);
-        color: var(--parchment);
+        color: #fff;
+      }
+      .btn-amber {
+        background: var(--amber);
+        color: var(--ink);
+      }
+      .btn-amber:hover {
+        background: #e0b50a;
+        transform: translateY(-1px);
+      }
+
+      /* ---------- HERO ---------- */
+      .hero {
+        padding: 4.5rem 0 5rem;
+        background: linear-gradient(180deg, #f9f7f1 0%, var(--parchment) 100%);
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 3.5rem;
+        align-items: center;
+      }
+      .hero .eyebrow {
+        display: inline-block;
+        background: #fff6cf;
+        color: #6b5600;
+        padding: 5px 12px;
+        border-radius: 999px;
+        margin-bottom: 1.2rem;
+      }
+      .hero h1 {
+        font-size: clamp(2.2rem, 4.6vw, 3.4rem);
+        line-height: 1.12;
+        color: var(--navy);
+      }
+      .hero p.lead {
+        margin-top: 1.3rem;
+        max-width: 48ch;
+        font-size: 1.12rem;
+        color: var(--text);
+      }
+      .hero-actions {
+        margin-top: 2rem;
+        display: flex;
+        gap: 0.9rem;
+        flex-wrap: wrap;
       }
       .hero-image {
         aspect-ratio: 4/3;
-        border-radius: 4px;
+        border-radius: 16px;
         overflow: hidden;
         background: #e5e2d8;
+        box-shadow: 0 14px 40px rgba(30, 40, 65, 0.18);
         position: relative;
+      }
+      .hero-image::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 16px;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+        pointer-events: none;
       }
       .hero-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
-      .img-caption {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(22, 33, 62, 0.82);
-        color: var(--parchment);
-        font-family: "IBM Plex Mono", monospace;
-        font-size: 0.68rem;
-        letter-spacing: 0.04em;
-        padding: 6px 10px;
-      }
       @media (max-width: 860px) {
+        .hero {
+          padding: 2.2rem 0 3.4rem;
+        }
         .hero-grid {
           grid-template-columns: 1fr;
+          gap: 2rem;
         }
         .hero-image {
           order: -1;
         }
       }
 
+      /* ---------- INFO CEPAT ---------- */
+      .quick {
+        margin-top: -2.2rem;
+        position: relative;
+        z-index: 2;
+        padding: 0;
+      }
+      .quick-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+      }
+      .quick-card {
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 1.2rem 1.3rem;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+      a.quick-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--amber);
+      }
+      .quick-card .q-icon {
+        font-size: 1.5rem;
+        line-height: 1;
+        margin-bottom: 6px;
+      }
+      .quick-card .q-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--sage);
+      }
+      .quick-card .q-value {
+        font-weight: 600;
+        color: var(--navy);
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+      .quick-card .q-sub {
+        font-size: 0.85rem;
+        color: #5a5a54;
+        line-height: 1.45;
+      }
+      @media (max-width: 960px) {
+        .quick-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 520px) {
+        .quick {
+          margin-top: -1.6rem;
+        }
+        .quick-grid {
+          grid-template-columns: 1fr;
+          gap: 0.7rem;
+        }
+        .quick-card {
+          flex-direction: row;
+          align-items: center;
+          flex-wrap: wrap;
+          column-gap: 0.9rem;
+        }
+        .quick-card .q-icon {
+          margin: 0;
+        }
+        .quick-card .q-text {
+          flex: 1;
+        }
+      }
+
       /* ---------- SECTION SHELL ---------- */
-      section {
-        padding: 4.2rem 0;
+      section.block {
+        padding: 5rem 0;
+      }
+      section.alt {
+        background: #fbfaf6;
+        border-top: 1px solid var(--line);
         border-bottom: 1px solid var(--line);
       }
       .section-head {
-        margin-bottom: 2.2rem;
-        max-width: 60ch;
+        margin-bottom: 2.4rem;
+        max-width: 62ch;
       }
       .section-head h2 {
-        font-size: clamp(1.6rem, 3vw, 2.1rem);
+        font-size: clamp(1.7rem, 3.2vw, 2.3rem);
         color: var(--navy);
-        margin-top: 0.6rem;
+        margin-top: 0.5rem;
+        line-height: 1.2;
+      }
+      .section-head h2::after {
+        content: "";
+        display: block;
+        width: 52px;
+        height: 4px;
+        background: var(--amber);
+        border-radius: 4px;
+        margin-top: 0.9rem;
+      }
+      .section-head .sub {
+        margin-top: 0.9rem;
+        color: var(--text);
       }
 
       /* ---------- PROFIL ---------- */
       .profil-grid {
         display: grid;
-        grid-template-columns: 1fr 0.85fr;
+        grid-template-columns: 1fr 0.9fr;
         gap: 3rem;
         align-items: start;
       }
-      .profil-grid p {
-        margin-bottom: 1rem;
-        color: #3a3a38;
+      .profil-text p {
+        margin-bottom: 1.1rem;
+        color: var(--text);
+      }
+      .profil-text p:first-child {
+        font-size: 1.12rem;
+        color: var(--ink);
       }
       .profil-image {
         aspect-ratio: 4/3;
-        border-radius: 4px;
+        border-radius: var(--radius);
         overflow: hidden;
         background: #e5e2d8;
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
+        box-shadow: var(--shadow);
       }
       .profil-image img {
         width: 100%;
@@ -300,14 +466,31 @@
       .vm-card {
         background: var(--white);
         border: 1px solid var(--line);
-        border-radius: 4px;
-        padding: 1.4rem;
+        border-left: 4px solid var(--amber);
+        border-radius: var(--radius);
+        padding: 1.4rem 1.5rem;
       }
       .vm-card + .vm-card {
         margin-top: 1rem;
       }
       .vm-card .eyebrow {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.6rem;
+      }
+      .vm-card p {
+        color: var(--text);
+      }
+      .vm-card ol {
+        margin: 0.2rem 0 0 1.2rem;
+        color: var(--text);
+        font-size: 0.97rem;
+        line-height: 1.6;
+      }
+      .vm-card ol li {
+        margin-bottom: 0.65rem;
+        padding-left: 0.2rem;
+      }
+      .vm-card ol li:last-child {
+        margin-bottom: 0;
       }
       @media (max-width: 860px) {
         .profil-grid {
@@ -315,23 +498,29 @@
         }
       }
 
-      /* ---------- UNGGULAN (DKV & VOLLY) ---------- */
+      /* ---------- UNGGULAN ---------- */
       .unggulan-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
+        gap: 1.6rem;
       }
       .unggulan-card {
         background: var(--white);
         border: 1px solid var(--line);
-        border-radius: 4px;
+        border-radius: var(--radius);
         overflow: hidden;
         display: flex;
         flex-direction: column;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .unggulan-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(30, 40, 65, 0.12);
       }
       .unggulan-img {
         aspect-ratio: 16 / 9;
         background: #e5e2d8;
+        overflow: hidden;
       }
       .unggulan-img img {
         width: 100%;
@@ -345,13 +534,14 @@
         flex: 1;
       }
       .unggulan-content h3 {
-        font-size: 1.25rem;
+        font-size: 1.35rem;
         color: var(--navy);
-        margin: 0.4rem 0 0.8rem;
+        margin: 0.5rem 0 0.7rem;
+        line-height: 1.25;
       }
       .unggulan-content p {
-        color: #3a3a38;
-        font-size: 0.95rem;
+        color: var(--text);
+        font-size: 1rem;
       }
       @media (max-width: 860px) {
         .unggulan-grid {
@@ -359,96 +549,21 @@
         }
       }
 
-      /* ---------- BERITA (signature timeline with thumbnails) ---------- */
-      .timeline {
-        border-left: 2px solid var(--line);
-        margin-left: 6px;
-      }
-      .t-item {
-        position: relative;
-        padding: 0 0 2.2rem 2rem;
-        display: flex;
-        gap: 1.5rem;
-      }
-      .t-item:last-child {
-        padding-bottom: 0;
-      }
-      .t-item::before {
-        content: "";
-        position: absolute;
-        left: -7px;
-        top: 4px;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: var(--amber);
-        border: 2px solid var(--parchment);
-      }
-      .t-thumb {
-        flex: 0 0 220px;
-        aspect-ratio: 16 / 9;
-        border-radius: 6px;
-        overflow: hidden;
-        background: #e5e2d8;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-      }
-      .t-thumb img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-      .t-body {
-        flex: 1;
-        min-width: 0;
-      }
-      .t-date {
-        font-family: "IBM Plex Mono", monospace;
-        font-size: 0.78rem;
-        color: var(--sage);
-        margin-bottom: 0.4rem;
-      }
-      .t-item h3 {
-        font-size: 1.15rem;
-        color: var(--navy);
-        margin-bottom: 0.35rem;
-      }
-      .t-item p {
-        color: #3a3a38;
-        max-width: 60ch;
-        font-size: 0.95rem;
-      }
       .tag {
         display: inline-block;
+        align-self: flex-start;
         font-family: "IBM Plex Mono", monospace;
-        font-size: 0.7rem;
+        font-size: 0.72rem;
         text-transform: uppercase;
         letter-spacing: 0.06em;
         background: #edeae0;
         color: var(--navy);
-        padding: 2px 8px;
-        border-radius: 2px;
-        margin-bottom: 0.5rem;
-      }
-      .loading-msg {
-        font-family: "IBM Plex Mono", monospace;
-        font-size: 0.85rem;
-        color: var(--sage);
-        padding: 1rem 0;
-      }
-      @media (max-width: 700px) {
-        .t-item {
-          flex-direction: column;
-          gap: 1rem;
-        }
-        .t-thumb {
-          width: 100%;
-          flex: none;
-          aspect-ratio: 16 / 9;
-        }
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-weight: 500;
       }
 
-      /* ---------- STAF (Dibuat tepat 4 kolom per baris di desktop) ---------- */
+      /* ---------- STAF ---------- */
       .staf-scroll {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -457,55 +572,57 @@
       .staf-card {
         background: var(--white);
         border: 1px solid var(--line);
-        border-radius: 4px;
+        border-radius: var(--radius);
         overflow: hidden;
         display: flex;
-        flex-direction: column; /* Menjaga tinggi kartu seragam dan sejajar */
+        flex-direction: column;
       }
       .staf-photo {
-        aspect-ratio: 4/3;
+        aspect-ratio: 4/4.2;
         background: #e5e2d8;
         flex-shrink: 0;
+        overflow: hidden;
       }
       .staf-photo img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: top center;
       }
       .staf-info {
-        padding: 0.9rem 1rem;
+        padding: 0.95rem 1.05rem 1.1rem;
         display: flex;
         flex-direction: column;
-        flex: 1; /* Mengisi sisa ruang secara fleksibel */
-        justify-content: space-between; /* Menjaga posisi teks bawah tetap sejajar rata */
+        flex: 1;
+        justify-content: space-between;
       }
       .staf-info .name {
         font-family: "Fraunces", serif;
-        font-size: 15px; /* Ukuran pas untuk nama panjang maupun pendek */
+        font-weight: 600;
+        font-size: 1rem;
         color: var(--navy);
-        line-height: 1.25;
+        line-height: 1.3;
       }
       .staf-info .role {
         font-family: "IBM Plex Mono", monospace;
-        font-size: 0.7rem;
+        font-size: 0.72rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
         color: var(--sage);
         margin-top: 8px;
+        line-height: 1.4;
       }
       .staf-hint {
         display: none;
-        font-size: 0.8rem;
-        color: #6b6a63;
+        font-size: 0.85rem;
+        color: #5f5e57;
         margin-top: 0.8rem;
       }
-
       @media (max-width: 900px) {
         .staf-scroll {
-          grid-template-columns: repeat(2, 1fr); /* 2 kolom untuk tablet */
+          grid-template-columns: repeat(2, 1fr);
         }
       }
-
       @media (max-width: 600px) {
         .staf-scroll {
           display: flex;
@@ -514,12 +631,13 @@
           -webkit-overflow-scrolling: touch;
           scrollbar-width: none;
           gap: 0.8rem;
+          padding-bottom: 4px;
         }
         .staf-scroll::-webkit-scrollbar {
           display: none;
         }
         .staf-card {
-          flex: 0 0 76%;
+          flex: 0 0 72%;
           scroll-snap-align: start;
         }
         .staf-hint {
@@ -527,15 +645,131 @@
         }
       }
 
-      /* ---------- GALERI (ringkas) ---------- */
+      /* ---------- BERITA ---------- */
+      .berita-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.4rem;
+      }
+      .news-card {
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .news-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(30, 40, 65, 0.12);
+      }
+      .news-thumb {
+        aspect-ratio: 16 / 9;
+        background: #e5e2d8;
+        overflow: hidden;
+      }
+      .news-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .news-body {
+        padding: 1.2rem 1.3rem 1.4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        flex: 1;
+      }
+      .news-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        flex-wrap: wrap;
+      }
+      .news-date {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.78rem;
+        color: var(--sage);
+      }
+      .news-card h3 {
+        font-size: 1.12rem;
+        color: var(--navy);
+        line-height: 1.3;
+      }
+      .news-card p {
+        color: var(--text);
+        font-size: 0.95rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .news-card.expanded p {
+        -webkit-line-clamp: unset;
+        display: block;
+      }
+      .news-more {
+        margin-top: auto;
+        align-self: flex-start;
+        background: none;
+        border: none;
+        color: var(--navy);
+        font-weight: 600;
+        font-size: 0.88rem;
+        cursor: pointer;
+        padding: 4px 0;
+        font-family: "Inter", sans-serif;
+      }
+      .news-more:hover {
+        text-decoration: underline;
+      }
+      .berita-actions {
+        margin-top: 2rem;
+        text-align: center;
+      }
+      .loading-msg {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.9rem;
+        color: var(--sage);
+        padding: 1rem 0;
+        grid-column: 1 / -1;
+      }
+      .error-msg {
+        color: #b03a2e;
+      }
+      .skeleton {
+        background: linear-gradient(90deg, #ebe8de 25%, #f4f2ea 50%, #ebe8de 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.4s infinite;
+        border-radius: var(--radius);
+        min-height: 260px;
+      }
+      @keyframes shimmer {
+        to {
+          background-position: -200% 0;
+        }
+      }
+      @media (max-width: 960px) {
+        .berita-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 600px) {
+        .berita-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ---------- GALERI ---------- */
       .galeri-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 0.8rem;
+        gap: 1rem;
       }
       .galeri-grid figure {
         overflow: hidden;
-        border-radius: 4px;
+        border-radius: var(--radius);
         aspect-ratio: 4/3;
         background: #e5e2d8;
       }
@@ -557,94 +791,138 @@
       /* ---------- KONTAK ---------- */
       .kontak-grid {
         display: grid;
-        grid-template-columns: 0.9fr 1.1fr;
-        gap: 3rem;
-      }
-      .kontak-image {
-        aspect-ratio: 4/3;
-        border-radius: 4px;
-        overflow: hidden;
-        background: #e5e2d8;
-      }
-      .kontak-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+        align-items: start;
       }
       .kontak-list {
         list-style: none;
-        margin-bottom: 1.2rem;
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 0.6rem 1.4rem;
       }
       .kontak-list li {
         display: flex;
-        gap: 0.9rem;
-        padding: 0.9rem 0;
+        gap: 1rem;
+        padding: 1rem 0;
         border-bottom: 1px solid var(--line);
       }
-      .kontak-list li:first-child {
-        padding-top: 0;
+      .kontak-list li:last-child {
+        border-bottom: none;
       }
       .kontak-list .k-label {
         font-family: "IBM Plex Mono", monospace;
-        font-size: 0.72rem;
+        font-size: 0.74rem;
         text-transform: uppercase;
         color: var(--sage);
-        min-width: 90px;
-        padding-top: 2px;
+        min-width: 96px;
+        padding-top: 4px;
       }
-      .map-box {
+      .kontak-list a {
+        color: var(--navy);
+        font-weight: 500;
+      }
+      .kontak-list a:hover {
+        text-decoration: underline;
+      }
+      .map-wrap {
         border: 1px solid var(--line);
-        border-radius: 4px;
+        border-radius: var(--radius);
+        overflow: hidden;
         background: var(--white);
-        padding: 1.4rem;
       }
-      .map-box .eyebrow {
-        margin-bottom: 0.6rem;
+      .map-wrap iframe {
+        width: 100%;
+        height: 320px;
+        border: 0;
+        display: block;
+      }
+      .map-foot {
+        padding: 1rem 1.2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .map-foot p {
+        font-size: 0.92rem;
+        color: var(--text);
       }
       @media (max-width: 860px) {
         .kontak-grid {
           grid-template-columns: 1fr;
         }
       }
+      @media (max-width: 600px) {
+        .kontak-list li {
+          flex-direction: column;
+          gap: 0.2rem;
+        }
+        .kontak-list .k-label {
+          min-width: auto;
+        }
+      }
 
-      /* ---------- TATA TERTIB ---------- */
-      .tatib {
+      /* ---------- CTA (SPMB + TATIB) ---------- */
+      .cta-grid {
         display: grid;
-        grid-template-columns: 0.9fr 1.1fr;
-        gap: 3rem;
-        align-items: center;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.4rem;
+      }
+      .cta-card {
+        border-radius: 14px;
+        padding: 2.2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+      }
+      .cta-card h2 {
+        font-size: 1.6rem;
+        line-height: 1.2;
+      }
+      .cta-card p.desc {
+        max-width: 44ch;
+      }
+      .cta-card .btn {
+        margin-top: 0.6rem;
+      }
+      .cta-spmb {
+        background: var(--navy);
+        color: #fff;
+      }
+      .cta-spmb .eyebrow {
+        color: var(--amber);
+      }
+      .cta-spmb p.desc {
+        color: #e3e8f2;
+      }
+      .cta-tatib {
         background: var(--white);
         border: 1px solid var(--line);
-        border-radius: 4px;
-        padding: 2.2rem;
       }
-      .tatib-image {
-        aspect-ratio: 4/3;
-        border-radius: 4px;
-        overflow: hidden;
-        background: #e5e2d8;
+      .cta-tatib h2 {
+        color: var(--navy);
       }
-      .tatib-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      .tatib p {
-        color: #3a3a38;
-        margin: 1rem 0 1.4rem;
-        max-width: 52ch;
+      .cta-tatib p.desc {
+        color: var(--text);
       }
       @media (max-width: 860px) {
-        .tatib {
+        .cta-grid {
           grid-template-columns: 1fr;
+        }
+        .cta-card {
+          padding: 1.7rem;
         }
       }
 
       /* ---------- FOOTER ---------- */
       footer {
         background: var(--navy);
-        color: #dad9d2;
-        padding: 3rem 0 1.6rem;
+        color: #dfe3ec;
+        padding: 3.2rem 0 1.6rem;
       }
       .footer-top {
         display: flex;
@@ -653,395 +931,454 @@
         flex-wrap: wrap;
         gap: 2rem;
         padding-bottom: 2rem;
-        border-bottom: 1px solid #2a3a5c;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
       }
       footer .brand-name {
-        color: var(--parchment);
+        color: #fff;
       }
       .footer-links {
         display: flex;
-        gap: 2.5rem;
+        gap: 3rem;
         flex-wrap: wrap;
       }
       .footer-col h4 {
         font-family: "IBM Plex Mono", monospace;
-        font-size: 0.72rem;
+        font-size: 0.74rem;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: #8c9ab8;
+        color: #a9b6d1;
         margin-bottom: 0.8rem;
       }
-      .footer-col a,
-      .footer-col p {
+      .footer-col a {
         display: block;
-        font-size: 0.9rem;
+        font-size: 0.93rem;
         margin-bottom: 0.5rem;
-        color: #dad9d2;
+        color: #dfe3ec;
       }
       .footer-col a:hover {
         color: var(--amber);
       }
       .footer-bottom {
         padding-top: 1.3rem;
-        font-size: 0.8rem;
-        color: #8c9ab8;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 0.5rem;
+        font-size: 0.82rem;
+        color: #a9b6d1;
       }
 
-      /* ---------- OPTIMASI MOBILE ---------- */
+      /* ---------- BACK TO TOP ---------- */
+      .to-top {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: none;
+        background: var(--navy);
+        color: #fff;
+        font-size: 1.2rem;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+        z-index: 40;
+      }
+      .to-top.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* ---------- REVEAL ---------- */
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+        .skeleton {
+          animation: none;
+        }
+      }
       @media (max-width: 600px) {
+        body {
+          font-size: 16.5px;
+        }
         .wrap {
-          padding: 0 1.25rem;
+          padding: 0 1.2rem;
         }
         nav.wrap {
           height: 64px;
         }
-        section {
-          padding: 3rem 0;
+        .nav-links {
+          top: 64px;
         }
-        .hero {
-          padding: 2.6rem 0 3rem;
+        .brand-name {
+          font-size: 0.95rem;
+        }
+        section.block {
+          padding: 3.4rem 0;
         }
         .hero-actions .btn {
           flex: 1 1 auto;
           justify-content: center;
         }
-        .tatib {
-          padding: 1.4rem;
-        }
-        .footer-top {
-          gap: 1.6rem;
-        }
         .footer-links {
-          gap: 1.6rem 2rem;
-        }
-
-        .kontak-list li {
-          flex-direction: column;
-          gap: 0.3rem;
-          padding: 1rem 0.2rem;
-        }
-        .kontak-list .k-label {
-          min-width: auto;
-        }
-        .map-box {
-          padding: 1.2rem 1.1rem;
-          margin: 0 0.2rem;
+          gap: 1.6rem 2.2rem;
         }
       }
     </style>
   </head>
   <body>
+    <a class="skip-link" href="#profil">Lewati ke konten</a>
+
     <header>
-      <nav class="wrap">
-        <div class="brand">
-          <div class="brand-mark">
+      <nav class="wrap" aria-label="Navigasi utama">
+        <a class="brand" href="#beranda">
+          <span class="brand-mark">
             <img src="img/logo.png" alt="Logo SMK Wiraguna Limbangan" />
-          </div>
+          </span>
           <span class="brand-name">SMK Wiraguna Limbangan</span>
-        </div>
+        </a>
         <div class="nav-links" id="navLinks">
           <a href="#beranda">Beranda</a>
           <a href="#profil">Profil</a>
           <a href="#unggulan">Unggulan</a>
           <a href="#staf">Staf</a>
           <a href="#berita">Berita</a>
-          <a href="#galeri">Galeri</a>
           <a href="#kontak">Kontak</a>
+          <a
+            class="nav-cta"
+            href="https://buatwr7-oss.github.io/SPMB/"
+            target="_blank"
+            rel="noopener"
+            >Info SPMB ↗</a
+          >
         </div>
-        <button class="nav-toggle" id="navToggle" aria-label="Buka menu">
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Buka menu"
+          aria-expanded="false"
+          aria-controls="navLinks"
+        >
           ☰
         </button>
       </nav>
     </header>
 
-    <section class="hero" id="beranda">
-      <div class="wrap hero-grid">
-        <div>
-          <p class="eyebrow">Tahun Ajaran 2026/2027</p>
-          <h1>
-            Tumbuh berprestasi, berkarakter, dan siap melangkah lebih jauh.
-          </h1>
-          <p class="lead">
-            SMK Wiraguna Limbangan membentuk siswa yang kompeten di bidang
-            keahliannya dan matang secara karakter, dengan guru yang mendampingi
-            setiap langkah.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#profil">Lihat Profil Sekolah</a>
-            <a
+    <main>
+      <!-- HERO -->
+      <section class="hero" id="beranda">
+        <div class="wrap hero-grid">
+          <div>
+            <p class="eyebrow">Tahun Ajaran 2026/2027</p>
+            <h1>
+              Tumbuh berprestasi, berkarakter, dan siap melangkah lebih jauh.
+            </h1>
+            <p class="lead">
+              SMK Wiraguna Limbangan membentuk siswa yang kompeten di bidang
+              keahliannya dan matang secara karakter, dengan guru yang
+              mendampingi setiap langkah.
+            </p>
+            <div class="hero-actions">
+              <a
+                class="btn btn-amber"
+                href="https://buatwr7-oss.github.io/SPMB/"
+                target="_blank"
+                rel="noopener"
+                >Daftar / Info SPMB ↗</a
+              >
+              <a class="btn btn-ghost" href="#profil">Kenali Sekolah Kami</a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img
+              src="img/utama.webp"
+              alt="Siswa dan lingkungan SMK Wiraguna Limbangan"
+              fetchpriority="high"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- INFO CEPAT -->
+      <section class="quick" aria-label="Informasi cepat">
+        <div class="wrap quick-grid">
+          <a
+            class="quick-card"
+            href="https://buatwr7-oss.github.io/SPMB/"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="q-icon" aria-hidden="true">🎓</span>
+            <span class="q-text">
+              <span class="q-label">Pendaftaran</span><br />
+              <span class="q-value">SPMB 2026/2027</span><br />
+              <span class="q-sub">Syarat, alur, dan formulir pendaftaran</span>
+            </span>
+          </a>
+          <a class="quick-card" href="#kontak">
+            <span class="q-icon" aria-hidden="true">🕖</span>
+            <span class="q-text">
+              <span class="q-label">Jam Layanan</span><br />
+              <span class="q-value">Senin–Jumat</span><br />
+              <span class="q-sub">07.00–15.00 WIB</span>
+            </span>
+          </a>
+          <a
+            class="quick-card"
+            href="https://www.google.com/maps/place/SMK+WIRAGUNA+LIMBANGAN/@-7.0268828,107.9929522,17z/data=!3m1!4b1!4m6!3m5!1s0x2e68cba8a5d9476b:0xa0b76dc02d1afa09!8m2!3d-7.0268881!4d107.9955271!16s%2Fg%2F11ckkyfvm8?entry=ttu&g_ep=EgoyMDI2MDgyNS4wIKXMDSoASAFQAw%3D%3D"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="q-icon" aria-hidden="true">📍</span>
+            <span class="q-text">
+              <span class="q-label">Lokasi</span><br />
+              <span class="q-value">Blubur Limbangan, Garut</span><br />
+              <span class="q-sub">Buka rute di Google Maps</span>
+            </span>
+          </a>
+          <a
+            class="quick-card"
+            href="https://tatib.smkwiraguna.sch.id"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="q-icon" aria-hidden="true">📋</span>
+            <span class="q-text">
+              <span class="q-label">Panduan Siswa</span><br />
+              <span class="q-value">Tata Tertib</span><br />
+              <span class="q-sub">Kedisiplinan, seragam, dan aturan belajar</span>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <!-- PROFIL -->
+      <section class="block" id="profil">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="eyebrow">Profil Sekolah</p>
+            <h2>Mengenal Wiraguna Limbangan lebih dekat</h2>
+          </div>
+          <div class="profil-grid">
+            <div class="profil-text reveal">
+              <p>
+                SMK Wiraguna berdedikasi untuk mencetak generasi dan warga
+                sekolah yang unggul, mandiri, serta berlandaskan pada imtaq dan
+                iptek di era global, dengan tetap memegang teguh nilai-nilai
+                masyarakat dan budaya bangsa.
+              </p>
+              <p>
+                Melalui peningkatan mutu pendidikan, pembelajaran berbasis minat
+                peserta didik serta kebutuhan DUDIKA (Dunia Usaha, Dunia
+                Industri, dan Dunia Kerja), pembinaan akademik maupun
+                non-akademik yang optimal, serta jalinan kerja sama yang kuat
+                dengan orang tua dan alumni, SMK Wiraguna Limbangan secara
+                konsisten menghadirkan lingkungan belajar yang sehat, bersih,
+                nyaman, dan berkarakter.
+              </p>
+            </div>
+            <div class="reveal">
+              <div class="profil-image">
+                <img
+                  src="img/tentang.webp"
+                  alt="Kegiatan di SMK Wiraguna Limbangan"
+                  loading="lazy"
+                />
+              </div>
+              <div class="vm-card">
+                <p class="eyebrow">Visi</p>
+                <p>
+                  Mewujudkan warga sekolah yang unggul dan mandiri dilandasi
+                  imtaq dan iptek di era global yang berdasarkan nilai-nilai
+                  masyarakat dan budaya bangsa.
+                </p>
+              </div>
+              <div class="vm-card">
+                <p class="eyebrow">Misi</p>
+                <ol>
+                  <li>
+                    Meningkatkan mutu pendidikan dan pelatihan melalui
+                    pembelajaran yang berkualitas dan berorientasi kepada
+                    pencapaian kompetensi dengan mempertimbangkan potensi yang
+                    dimiliki, serta dilandasi imtaq dan iptek.
+                  </li>
+                  <li>
+                    Melaksanakan kegiatan pembelajaran berbasis pada minat dan
+                    kebutuhan peserta didik dan DUDIKA yang didukung oleh
+                    teknologi informasi dan komunikasi.
+                  </li>
+                  <li>
+                    Mengoptimalkan pembinaan dan pembimbingan kegiatan akademik
+                    dan non akademik.
+                  </li>
+                  <li>Mewujudkan lingkungan yang sehat, bersih, dan nyaman.</li>
+                  <li>
+                    Meningkatkan kerjasama dengan orang tua peserta didik,
+                    DUDIKA dan alumni.
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- UNGGULAN -->
+      <section class="block alt" id="unggulan">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="eyebrow">Keunggulan Sekolah</p>
+            <h2>Fokus keahlian dan prestasi pilihan</h2>
+          </div>
+          <div class="unggulan-grid">
+            <article class="unggulan-card reveal">
+              <div class="unggulan-img">
+                <img
+                  src="img/dkv.webp"
+                  alt="Desain Komunikasi Visual SMK Wiraguna"
+                  loading="lazy"
+                />
+              </div>
+              <div class="unggulan-content">
+                <span class="tag">Kompetensi Keahlian</span>
+                <h3>Desain Komunikasi Visual (DKV)</h3>
+                <p>
+                  Program keahlian yang membekali siswa dengan kemampuan desain
+                  grafis, multimedia, fotografi, dan videografi, siap
+                  menghadapi industri kreatif digital modern.
+                </p>
+              </div>
+            </article>
+            <article class="unggulan-card reveal">
+              <div class="unggulan-img">
+                <img
+                  src="img/volly.webp"
+                  alt="Ekstrakurikuler bola voli SMK Wiraguna"
+                  loading="lazy"
+                />
+              </div>
+              <div class="unggulan-content">
+                <span class="tag">Ekstrakurikuler &amp; Prestasi</span>
+                <h3>Tim Bola Voli Unggulan</h3>
+                <p>
+                  Wadah pengembangan bakat olahraga yang menjunjung tinggi
+                  sportivitas, disiplin, dan kekompakan tim, serta rutin
+                  menorehkan prestasi di berbagai ajang kompetisi.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- STAF -->
+      <section class="block" id="staf">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="eyebrow">Para Staf</p>
+            <h2>Tenaga pendidik dan kependidikan</h2>
+          </div>
+          <div class="staf-scroll" id="stafContainer">
+            <div class="loading-msg">Memuat data staf...</div>
+          </div>
+          <p class="staf-hint">← Geser ke samping untuk melihat staf lainnya →</p>
+        </div>
+      </section>
+
+      <!-- BERITA -->
+      <section class="block alt" id="berita">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="eyebrow">Berita &amp; Pengumuman</p>
+            <h2>Kabar terbaru dari sekolah</h2>
+          </div>
+          <div class="berita-grid" id="timelineContainer">
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+          </div>
+          <div class="berita-actions">
+            <button
               class="btn btn-ghost"
+              id="beritaMore"
+              type="button"
+              hidden
+            >
+              Tampilkan berita lainnya
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- GALERI -->
+      <section class="block" id="galeri">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="eyebrow">Galeri</p>
+            <h2>Sekilas suasana sekolah kami</h2>
+          </div>
+          <div class="galeri-grid reveal">
+            <figure>
+              <img
+                src="img/Sekilas1.webp"
+                alt="Suasana sekolah"
+                loading="lazy"
+              />
+            </figure>
+            <figure>
+              <img
+                src="img/Sekilas2.webp"
+                alt="Kegiatan praktik siswa"
+                loading="lazy"
+              />
+            </figure>
+            <figure>
+              <img
+                src="img/Sekilas3.webp"
+                alt="Kegiatan siswa"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- SPMB + TATIB -->
+      <section class="block alt" id="tata-tertib" style="padding: 4rem 0">
+        <div class="wrap cta-grid">
+          <div class="cta-card cta-spmb reveal">
+            <p class="eyebrow">Calon Siswa Baru</p>
+            <h2>Bergabung bersama SMK Wiraguna Limbangan</h2>
+            <p class="desc">
+              Lihat syarat, alur pendaftaran, dan kontak panitia SPMB tahun
+              ajaran 2026/2027.
+            </p>
+            <a
+              class="btn btn-amber"
               href="https://buatwr7-oss.github.io/SPMB/"
               target="_blank"
               rel="noopener"
-              >Informasi SPMB ↗</a
+              >Buka Informasi SPMB ↗</a
             >
           </div>
-        </div>
-        <div class="hero-image">
-          <img
-            src="img/utama.webp"
-            alt="Placeholder gambar siswa dan lingkungan sekolah"
-          />
-        </div>
-      </div>
-    </section>
-
-    <section id="profil">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow">Profil Sekolah</p>
-          <h2>Mengenal Wiraguna Limbangan lebih dekat</h2>
-        </div>
-        <div class="profil-grid">
-          <div>
-            <p>
-              SMK Wiraguna berdedikasi untuk mencetak generasi dan warga sekolah
-              yang unggul, mandiri, serta berlandaskan pada imtaq dan iptek di
-              era global, dengan tetap memegang teguh nilai-nilai masyarakat dan
-              budaya bangsa..
-            </p>
-            <p>
-              Melalui peningkatan mutu pendidikan, pembelajaran berbasis minat
-              peserta didik serta kebutuhan DUDIKA (Dunia Usaha, Dunia Industri,
-              dan Dunia Kerja), pembinaan akademik maupun non-akademik yang
-              optimal, serta jalinan kerja sama yang kuat dengan orang tua dan
-              alumni, SMK Wiraguna Limbangan secara konsisten menghadirkan
-              lingkungan belajar yang sehat, bersih, nyaman, dan berkarakter.
-            </p>
-          </div>
-          <div>
-            <div class="profil-image">
-              <img
-                src="img/tentang.webp"
-                alt="Placeholder gambar kegiatan sekolah"
-              />
-            </div>
-            <div class="vm-card">
-              <p class="eyebrow">Visi</p>
-              <p style="margin: 0">
-                Mewujudkan warga sekolah yang unggul dan mandiri dilandasi imtaq
-                dan iptek di era global yang berdasarkan nilai-nilai masyarakat
-                dan budaya bangsa.
-              </p>
-            </div>
-            <div class="vm-card">
-              <p class="eyebrow">Misi</p>
-              <ul
-                style="
-                  margin: 0.4rem 0 0 1.2rem;
-                  color: #3a3a38;
-                  font-size: 0.95rem;
-                  line-height: 1.5;
-                "
-              >
-                <li style="margin-bottom: 0.6rem">
-                  Meningkatkan mutu pendidikan dan pelatihan melalui
-                  pembelajaran yang berkualitas dan berorientasi kepada
-                  pencapaian kompetensi dengan mempertimbangkan potensi yang
-                  dimiliki, serta dilandasi imtaq dan iptek.
-                </li>
-                <li style="margin-bottom: 0.6rem">
-                  Melaksanakan kegiatan pembelajaran berbasis pada minat dan
-                  kebutuhan peserta didik dan DUDIKA yang didukung oleh
-                  teknologi informasi dan komunikasi.
-                </li>
-                <li style="margin-bottom: 0.6rem">
-                  Mengoptimalkan pembinaan dan pembimbingan kegiatan akademik
-                  dan non akademik.
-                </li>
-                <li style="margin-bottom: 0.6rem">
-                  Mewujudkan lingkungan yang sehat, bersih, dan nyaman.
-                </li>
-                <li>
-                  Meningkatkan kerjasama dengan orang tua peserta didik, DUDIKA
-                  dan alumni.
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION BIDANG UNGGULAN (DKV & VOLLY) -->
-    <section id="unggulan">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow">Keunggulan Sekolah</p>
-          <h2>Fokus keahlian dan prestasi pilihan</h2>
-        </div>
-        <div class="unggulan-grid">
-          <!-- Kartu DKV -->
-          <div class="unggulan-card">
-            <div class="unggulan-img">
-              <img
-                src="img/dkv.webp"
-                alt="Desain Komunikasi Visual SMK Wiraguna"
-              />
-            </div>
-            <div class="unggulan-content">
-              <span class="tag">Kompetensi Keahlian</span>
-              <h3>Desain Komunikasi Visual (DKV)</h3>
-              <p>
-                Program keahlian yang membekali siswa dengan kemampuan desain
-                grafis, multimedia, fotografi, dan videografi, siap menghadapi
-                industri kreatif digital modern.
-              </p>
-            </div>
-          </div>
-
-          <!-- Kartu Volly -->
-          <div class="unggulan-card">
-            <div class="unggulan-img">
-              <img
-                src="img/volly.webp"
-                alt="Ekstrakurikuler Bola Voli SMK Wiraguna"
-              />
-            </div>
-            <div class="unggulan-content">
-              <span class="tag">Ekstrakurikuler &amp; Prestasi</span>
-              <h3>Tim Bola Voli Unggulan</h3>
-              <p>
-                Wadah pengembangan bakat olahraga yang menjunjung tinggi
-                sportivitas, disiplin, dan kekompakan tim, serta rutin
-                menorehkan prestasi di berbagai ajang kompetisi.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION STAF DINAMIS DARI GOOGLE SHEETS -->
-    <section id="staf">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow">Para Staf</p>
-          <h2>Tenaga pendidik dan kependidikan</h2>
-        </div>
-        <div class="staf-scroll" id="stafContainer">
-          <!-- Indikator Loading awal sebelum data masuk dari Google Sheets -->
-          <div class="loading-msg">Memuat data staf dari server...</div>
-        </div>
-        <p class="staf-hint">Geser ke samping untuk melihat staf lainnya.</p>
-      </div>
-    </section>
-
-    <!-- SECTION BERITA DENGAN INDIKATOR LOADING -->
-    <section id="berita">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow">Berita &amp; Pengumuman</p>
-          <h2>Kabar terbaru dari sekolah</h2>
-        </div>
-        <div class="timeline" id="timelineContainer">
-          <!-- Indikator Loading awal sebelum data masuk -->
-          <div class="loading-msg">Memuat berita terbaru dari server...</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="galeri">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow">Galeri</p>
-          <h2>Sekilas suasana sekolah kami</h2>
-        </div>
-        <div class="galeri-grid">
-          <figure>
-            <img
-              src="img/Sekilas1.webp"
-              alt="Placeholder gambar suasana sekolah"
-            />
-          </figure>
-          <figure>
-            <img
-              src="img/Sekilas2.webp"
-              alt="Placeholder gambar kegiatan praktik"
-            />
-          </figure>
-          <figure>
-            <img
-              src="img/Sekilas3.webp"
-              alt="Placeholder gambar kegiatan siswa"
-            />
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <section id="kontak">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow">Kontak &amp; Lokasi</p>
-          <h2>Hubungi kami</h2>
-        </div>
-        <div class="kontak-grid">
-          <div class="kontak-image">
-            <img
-              src="img/hubungikami.webp"
-              alt="Placeholder gambar gedung sekolah"
-            />
-          </div>
-          <div>
-            <ul class="kontak-list">
-              <li>
-                <span class="k-label">Alamat</span
-                ><span
-                  >Kp. Dunguswiru RT 02 RW 03, Desa Dunguswiru, Kecamatan Blubur
-                  Limbangan, Kabupaten Garut, Jawa Barat 44186</span
-                >
-              </li>
-              <li>
-                <span class="k-label">Telepon</span><span>(0262) xxx-xxx</span>
-              </li>
-              <li>
-                <span class="k-label">Email</span
-                ><span>info@wiragunalimbangan.sch.id</span>
-              </li>
-              <li>
-                <span class="k-label">Jam Layanan</span
-                ><span>Senin–Jumat, 07.00–15.00 WIB</span>
-              </li>
-            </ul>
-            <div class="map-box">
-              <p class="eyebrow">Lokasi</p>
-              <p style="margin-bottom: 1rem; color: #3a3a38">
-                Sekolah berada di jalur yang mudah diakses dari jalur angkutan
-                umum.
-              </p>
-              <a
-                class="btn btn-ghost"
-                href="https://www.google.com/maps/place/SMK+WIRAGUNA+LIMBANGAN/@-7.0268828,107.9929522,17z/data=!3m1!4b1!4m6!3m5!1s0x2e68cba8a5d9476b:0xa0b76dc02d1afa09!8m2!3d-7.0268881!4d107.9955271!16s%2Fg%2F11ckkyfvm8?entry=ttu&g_ep=EgoyMDI2MDgyNS4wIKXMDSoASAFQAw%3D%3D"
-                target="_blank"
-                rel="noopener"
-                >Buka di Google Maps ↗</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="tata-tertib">
-      <div class="wrap">
-        <div class="tatib">
-          <div class="tatib-image">
-            <img
-              src="img/tatib.webp"
-              alt="Placeholder gambar tata tertib sekolah"
-            />
-          </div>
-          <div>
+          <div class="cta-card cta-tatib reveal">
             <p class="eyebrow">Panduan Siswa</p>
-            <h2 style="color: var(--navy); font-size: 1.6rem">
-              Tata tertib sekolah
-            </h2>
-            <p>
+            <h2>Tata tertib sekolah</h2>
+            <p class="desc">
               Baca ketentuan lengkap mengenai kedisiplinan, seragam, dan aturan
               kegiatan belajar mengajar di SMK Wiraguna Limbangan.
             </p>
@@ -1054,22 +1391,75 @@
             >
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <!-- KONTAK -->
+      <section class="block" id="kontak">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="eyebrow">Kontak &amp; Lokasi</p>
+            <h2>Hubungi kami</h2>
+          </div>
+          <div class="kontak-grid">
+            <ul class="kontak-list reveal">
+              <li>
+                <span class="k-label">Alamat</span>
+                <span
+                  >Kp. Dunguswiru RT 02 RW 03, Desa Dunguswiru, Kecamatan Blubur
+                  Limbangan, Kabupaten Garut, Jawa Barat 44186</span
+                >
+              </li>
+              <li>
+                <span class="k-label">Telepon</span>
+                <span>(0262) xxx-xxx</span>
+              </li>
+              <li>
+                <span class="k-label">Email</span>
+                <a href="mailto:info@wiragunalimbangan.sch.id"
+                  >info@wiragunalimbangan.sch.id</a
+                >
+              </li>
+              <li>
+                <span class="k-label">Jam Layanan</span>
+                <span>Senin–Jumat, 07.00–15.00 WIB</span>
+              </li>
+            </ul>
+            <div class="map-wrap reveal">
+              <iframe
+                title="Peta lokasi SMK Wiraguna Limbangan"
+                src="https://maps.google.com/maps?q=-7.0268881,107.9955271&z=16&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+              <div class="map-foot">
+                <p>Mudah dijangkau dari jalur angkutan umum.</p>
+                <a
+                  class="btn btn-ghost"
+                  href="https://www.google.com/maps/place/SMK+WIRAGUNA+LIMBANGAN/@-7.0268828,107.9929522,17z/data=!3m1!4b1!4m6!3m5!1s0x2e68cba8a5d9476b:0xa0b76dc02d1afa09!8m2!3d-7.0268881!4d107.9955271!16s%2Fg%2F11ckkyfvm8?entry=ttu&g_ep=EgoyMDI2MDgyNS4wIKXMDSoASAFQAw%3D%3D"
+                  target="_blank"
+                  rel="noopener"
+                  >Buka di Google Maps ↗</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <footer>
       <div class="wrap">
         <div class="footer-top">
           <div>
             <div style="display: flex; align-items: center; gap: 10px">
-              <div class="brand-mark">
+              <span class="brand-mark">
                 <img src="img/logo.png" alt="Logo SMK Wiraguna Limbangan" />
-              </div>
+              </span>
               <span class="brand-name" style="font-size: 1.1rem"
                 >SMK Wiraguna Limbangan</span
               >
             </div>
-            <p style="max-width: 32ch; margin-top: 0.7rem; font-size: 0.88rem">
+            <p style="max-width: 34ch; margin-top: 0.8rem; font-size: 0.9rem">
               Kp. Dunguswiru RT 02 RW 03, Desa Dunguswiru, Kecamatan Blubur
               Limbangan, Kabupaten Garut, Jawa Barat 44186
             </p>
@@ -1087,10 +1477,10 @@
             <div class="footer-col">
               <h4>Tautan</h4>
               <a
-                href="https://buatwr7-oss.github.io/maintenance/"
+                href="https://buatwr7-oss.github.io/SPMB/"
                 target="_blank"
                 rel="noopener"
-                >PPDB Online ↗</a
+                >Informasi SPMB ↗</a
               >
               <a
                 href="https://tatib.smkwiraguna.sch.id"
@@ -1102,163 +1492,244 @@
           </div>
         </div>
         <div class="footer-bottom">
-          <span
-            >© 2026 SMK Wiraguna Limbangan. Seluruh hak cipta dilindungi.</span
-          >
+          © 2026 SMK Wiraguna Limbangan. Seluruh hak cipta dilindungi.
         </div>
       </div>
     </footer>
 
+    <button class="to-top" id="toTop" aria-label="Kembali ke atas" type="button">
+      ↑
+    </button>
+
     <script>
+      // ---------- NAV ----------
       const navToggle = document.getElementById("navToggle");
       const navLinks = document.getElementById("navLinks");
-      navToggle.addEventListener("click", () =>
-        navLinks.classList.toggle("open"),
+      navToggle.addEventListener("click", () => {
+        const open = navLinks.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", open);
+      });
+      navLinks.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          navToggle.setAttribute("aria-expanded", false);
+        }),
       );
-      navLinks
-        .querySelectorAll("a")
-        .forEach((a) =>
-          a.addEventListener("click", () => navLinks.classList.remove("open")),
-        );
 
-      // --- SCRIPT OTOMATIS LOAD BERITA DARI GOOGLE SHEETS ---
+      // Tandai menu aktif sesuai bagian yang sedang dibaca
+      const navAnchors = [...navLinks.querySelectorAll('a[href^="#"]')];
+      const spy = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              navAnchors.forEach((a) =>
+                a.classList.toggle(
+                  "active",
+                  a.getAttribute("href") === "#" + e.target.id,
+                ),
+              );
+            }
+          });
+        },
+        { rootMargin: "-45% 0px -50% 0px" },
+      );
+      navAnchors.forEach((a) => {
+        const t = document.querySelector(a.getAttribute("href"));
+        if (t) spy.observe(t);
+      });
+
+      // Tombol kembali ke atas
+      const toTop = document.getElementById("toTop");
+      window.addEventListener(
+        "scroll",
+        () => toTop.classList.toggle("show", window.scrollY > 700),
+        { passive: true },
+      );
+      toTop.addEventListener("click", () =>
+        window.scrollTo({ top: 0, behavior: "smooth" }),
+      );
+
+      // Animasi muncul saat di-scroll
+      const revealObs = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              revealObs.unobserve(e.target);
+            }
+          }),
+        { threshold: 0.12 },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => revealObs.observe(el));
+
+      // ---------- UTILITAS ----------
+      function esc(str) {
+        return String(str ?? "").replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      }
+      // Hanya izinkan URL gambar http(s) atau path lokal
+      function safeSrc(url, fallback) {
+        const u = (url || "").trim();
+        if (/^(https?:\/\/|img\/|\.?\/)/i.test(u)) return u;
+        return fallback;
+      }
+      // Parser CSV lengkap (mendukung tanda kutip dan baris baru di dalam sel)
+      function parseCSV(text) {
+        const rows = [];
+        let row = [],
+          cell = "",
+          q = false;
+        for (let i = 0; i < text.length; i++) {
+          const ch = text[i];
+          if (q) {
+            if (ch === '"' && text[i + 1] === '"') {
+              cell += '"';
+              i++;
+            } else if (ch === '"') q = false;
+            else cell += ch;
+          } else if (ch === '"') q = true;
+          else if (ch === ",") {
+            row.push(cell.trim());
+            cell = "";
+          } else if (ch === "\n" || ch === "\r") {
+            if (ch === "\r" && text[i + 1] === "\n") i++;
+            row.push(cell.trim());
+            rows.push(row);
+            row = [];
+            cell = "";
+          } else cell += ch;
+        }
+        if (cell.length || row.length) {
+          row.push(cell.trim());
+          rows.push(row);
+        }
+        return rows.filter((r) => r.some((c) => c !== ""));
+      }
+
+      // ---------- DATA GOOGLE SHEETS ----------
       const GOOGLE_SHEET_CSV_URL =
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vQMApRzQ34mN4Ck_TRpTIxV9GeRMBQqDKnrGopg_hWOtOHmFNUXOKFhFeMcUju03WMUzs1kf8kK3rtO/pub?gid=0&single=true&output=csv";
-
-      // --- SCRIPT OTOMATIS LOAD STAF/GURU DARI GOOGLE SHEETS ---
       const GOOGLE_SHEET_STAF_URL =
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vT_uWHfbZ6et8TrhzUpfkyjE0ZOo6ssZeh6M96vhSarqj7n6cRs3ifukithCU0X1b9XrH3YBVEIcgTO/pub?gid=0&single=true&output=csv";
 
-      async function loadBeritaFromSheet() {
+      const BERITA_AWAL = 6; // jumlah berita yang tampil pertama
+      const PLACEHOLDER_IMG = "img/utama.webp";
+
+      async function loadBerita() {
         const container = document.getElementById("timelineContainer");
-        if (
-          !GOOGLE_SHEET_CSV_URL ||
-          GOOGLE_SHEET_CSV_URL.includes("MASUKKAN_LINK")
-        ) {
-          return;
-        }
-
+        const moreBtn = document.getElementById("beritaMore");
         try {
-          const response = await fetch(GOOGLE_SHEET_CSV_URL);
-          const data = await response.text();
-          const rows = data.split("\n");
+          const res = await fetch(GOOGLE_SHEET_CSV_URL);
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          const rows = parseCSV(await res.text()).slice(1);
+          const items = rows.filter((c) => c.length >= 5);
 
-          if (rows.length > 1) {
-            container.innerHTML = ""; // Kosongkan indikator loading
-
-            for (let i = 1; i < rows.length; i++) {
-              let rowText = rows[i].trim();
-              if (!rowText) continue;
-
-              let cols = [];
-              let current = "";
-              let inQuotes = false;
-              for (let c = 0; c < rowText.length; c++) {
-                let char = rowText[c];
-                if (char === '"') {
-                  inQuotes = !inQuotes;
-                } else if (char === "," && !inQuotes) {
-                  cols.push(current.trim().replace(/^"|"$/g, ""));
-                  current = "";
-                } else {
-                  current += char;
-                }
-              }
-              cols.push(current.trim().replace(/^"|"$/g, ""));
-
-              if (cols.length >= 5) {
-                const tanggal = cols[0];
-                const kategori = cols[1];
-                const judul = cols[2];
-                const deskripsi = cols[3];
-                const gambar = cols[4];
-
-                const itemHTML = `
-                  <div class="t-item">
-                    <div class="t-thumb">
-                      <img src="${gambar}" alt="${judul}" />
-                    </div>
-                    <div class="t-body">
-                      <div class="t-date">${tanggal}</div>
-                      <span class="tag">${kategori}</span>
-                      <h3>${judul}</h3>
-                      <p>${deskripsi}</p>
-                    </div>
-                  </div>
-                `;
-                container.innerHTML += itemHTML;
-              }
-            }
+          if (!items.length) {
+            container.innerHTML =
+              '<p class="loading-msg">Belum ada berita saat ini.</p>';
+            return;
           }
-        } catch (error) {
-          console.error("Gagal memuat berita:", error);
-          container.innerHTML = `<p class="loading-msg" style="color: #b03a2e;">Gagal memuat data berita terbaru.</p>`;
+
+          container.innerHTML = items
+            .map(([tanggal, kategori, judul, deskripsi, gambar], i) => {
+              const hidden = i >= BERITA_AWAL ? " hidden" : "";
+              return `
+              <article class="news-card"${hidden}>
+                <div class="news-thumb">
+                  <img src="${esc(safeSrc(gambar, PLACEHOLDER_IMG))}" alt="${esc(judul)}" loading="lazy"
+                       onerror="this.onerror=null;this.src='${PLACEHOLDER_IMG}'" />
+                </div>
+                <div class="news-body">
+                  <div class="news-meta">
+                    <span class="tag">${esc(kategori)}</span>
+                    <span class="news-date">${esc(tanggal)}</span>
+                  </div>
+                  <h3>${esc(judul)}</h3>
+                  <p>${esc(deskripsi)}</p>
+                  <button class="news-more" type="button">Baca selengkapnya</button>
+                </div>
+              </article>`;
+            })
+            .join("");
+
+          // Tombol "baca selengkapnya" hanya muncul jika teks memang terpotong
+          container.querySelectorAll(".news-card").forEach((card) => {
+            const p = card.querySelector("p");
+            const btn = card.querySelector(".news-more");
+            btn.addEventListener("click", () => {
+              const open = card.classList.toggle("expanded");
+              btn.textContent = open ? "Tutup" : "Baca selengkapnya";
+            });
+            requestAnimationFrame(() => {
+              if (!card.hidden && p.scrollHeight <= p.clientHeight + 1)
+                btn.style.display = "none";
+            });
+          });
+
+          if (items.length > BERITA_AWAL) {
+            moreBtn.hidden = false;
+            moreBtn.addEventListener("click", () => {
+              container
+                .querySelectorAll(".news-card[hidden]")
+                .forEach((c) => (c.hidden = false));
+              moreBtn.hidden = true;
+            });
+          }
+        } catch (err) {
+          console.error("Gagal memuat berita:", err);
+          container.innerHTML =
+            '<p class="loading-msg error-msg">Berita belum dapat dimuat. Coba muat ulang halaman.</p>';
         }
       }
 
-      async function loadStafFromSheet() {
-        if (!GOOGLE_SHEET_STAF_URL || GOOGLE_SHEET_STAF_URL.trim() === "") {
-          return;
-        }
-
-        const stafContainer = document.getElementById("stafContainer");
+      async function loadStaf() {
+        const container = document.getElementById("stafContainer");
         try {
-          const response = await fetch(GOOGLE_SHEET_STAF_URL);
-          const data = await response.text();
-          const rows = data.split("\n");
+          const res = await fetch(GOOGLE_SHEET_STAF_URL);
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          const rows = parseCSV(await res.text()).slice(1);
+          const items = rows.filter((c) => c.length >= 2 && c[0]);
 
-          if (rows.length > 1) {
-            stafContainer.innerHTML = "";
-            for (let i = 1; i < rows.length; i++) {
-              let rowText = rows[i].trim();
-              if (!rowText) continue;
-
-              let cols = [];
-              let current = "";
-              let inQuotes = false;
-              for (let c = 0; c < rowText.length; c++) {
-                let char = rowText[c];
-                if (char === '"') {
-                  inQuotes = !inQuotes;
-                } else if (char === "," && !inQuotes) {
-                  cols.push(current.trim().replace(/^"|"$/g, ""));
-                  current = "";
-                } else {
-                  current += char;
-                }
-              }
-              cols.push(current.trim().replace(/^"|"$/g, ""));
-
-              if (cols.length >= 2) {
-                const nama = cols[0];
-                const role = cols[1];
-                // Jika kolom foto (kolom ke-3) kosong, otomatis gunakan foto default lokal
-                const foto =
-                  cols[2] && cols[2].trim() !== ""
-                    ? cols[2]
-                    : "img/profilguru.webp";
-
-                const stafHTML = `
-                  <div class="staf-card">
-                    <div class="staf-photo"><img src="${foto}" alt="${nama}" /></div>
-                    <div class="staf-info">
-                      <div class="name">${nama}</div>
-                      <div class="role">${role}</div>
-                    </div>
-                  </div>
-                `;
-                stafContainer.innerHTML += stafHTML;
-              }
-            }
+          if (!items.length) {
+            container.innerHTML =
+              '<p class="loading-msg">Data staf belum tersedia.</p>';
+            return;
           }
-        } catch (error) {
-          console.error("Gagal memuat data staf:", error);
-          stafContainer.innerHTML = `<p class="loading-msg" style="color: #b03a2e;">Gagal memuat data staf.</p>`;
+
+          container.innerHTML = items
+            .map(([nama, role, foto]) => {
+              const src = safeSrc(foto, "img/profilguru.webp");
+              return `
+              <div class="staf-card">
+                <div class="staf-photo">
+                  <img src="${esc(src)}" alt="${esc(nama)}" loading="lazy"
+                       onerror="this.onerror=null;this.src='img/profilguru.webp'" />
+                </div>
+                <div class="staf-info">
+                  <div class="name">${esc(nama)}</div>
+                  <div class="role">${esc(role)}</div>
+                </div>
+              </div>`;
+            })
+            .join("");
+        } catch (err) {
+          console.error("Gagal memuat data staf:", err);
+          container.innerHTML =
+            '<p class="loading-msg error-msg">Data staf belum dapat dimuat. Coba muat ulang halaman.</p>';
         }
       }
 
-      loadBeritaFromSheet();
-      loadStafFromSheet();
+      loadBerita();
+      loadStaf();
     </script>
   </body>
 </html>
