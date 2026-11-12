@@ -909,6 +909,20 @@
       .cta-tatib p.desc {
         color: var(--text);
       }
+      .cta-img {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: #e5e2d8;
+        margin-bottom: 0.4rem;
+      }
+      .cta-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+      }
       @media (max-width: 860px) {
         .cta-grid {
           grid-template-columns: 1fr;
@@ -1311,16 +1325,6 @@
             <div class="skeleton"></div>
             <div class="skeleton"></div>
           </div>
-          <div class="berita-actions">
-            <button
-              class="btn btn-ghost"
-              id="beritaMore"
-              type="button"
-              hidden
-            >
-              Tampilkan berita lainnya
-            </button>
-          </div>
         </div>
       </section>
 
@@ -1376,6 +1380,13 @@
             >
           </div>
           <div class="cta-card cta-tatib reveal">
+            <div class="cta-img">
+              <img
+                src="img/tatib.webp"
+                alt="Ilustrasi tata tertib sekolah"
+                loading="lazy"
+              />
+            </div>
             <p class="eyebrow">Panduan Siswa</p>
             <h2>Tata tertib sekolah</h2>
             <p class="desc">
@@ -1621,17 +1632,18 @@
       const GOOGLE_SHEET_STAF_URL =
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vT_uWHfbZ6et8TrhzUpfkyjE0ZOo6ssZeh6M96vhSarqj7n6cRs3ifukithCU0X1b9XrH3YBVEIcgTO/pub?gid=0&single=true&output=csv";
 
-      const BERITA_AWAL = 6; // jumlah berita yang tampil pertama
+      const BERITA_AWAL = 3; // jumlah berita yang ditampilkan
       const PLACEHOLDER_IMG = "img/utama.webp";
 
       async function loadBerita() {
         const container = document.getElementById("timelineContainer");
-        const moreBtn = document.getElementById("beritaMore");
         try {
           const res = await fetch(GOOGLE_SHEET_CSV_URL);
           if (!res.ok) throw new Error("HTTP " + res.status);
           const rows = parseCSV(await res.text()).slice(1);
-          const items = rows.filter((c) => c.length >= 5);
+          const items = rows
+            .filter((c) => c.length >= 5)
+            .slice(0, BERITA_AWAL);
 
           if (!items.length) {
             container.innerHTML =
@@ -1640,10 +1652,9 @@
           }
 
           container.innerHTML = items
-            .map(([tanggal, kategori, judul, deskripsi, gambar], i) => {
-              const hidden = i >= BERITA_AWAL ? " hidden" : "";
+            .map(([tanggal, kategori, judul, deskripsi, gambar]) => {
               return `
-              <article class="news-card"${hidden}>
+              <article class="news-card">
                 <div class="news-thumb">
                   <img src="${esc(safeSrc(gambar, PLACEHOLDER_IMG))}" alt="${esc(judul)}" loading="lazy"
                        onerror="this.onerror=null;this.src='${PLACEHOLDER_IMG}'" />
@@ -1670,20 +1681,10 @@
               btn.textContent = open ? "Tutup" : "Baca selengkapnya";
             });
             requestAnimationFrame(() => {
-              if (!card.hidden && p.scrollHeight <= p.clientHeight + 1)
+              if (p.scrollHeight <= p.clientHeight + 1)
                 btn.style.display = "none";
             });
           });
-
-          if (items.length > BERITA_AWAL) {
-            moreBtn.hidden = false;
-            moreBtn.addEventListener("click", () => {
-              container
-                .querySelectorAll(".news-card[hidden]")
-                .forEach((c) => (c.hidden = false));
-              moreBtn.hidden = true;
-            });
-          }
         } catch (err) {
           console.error("Gagal memuat berita:", err);
           container.innerHTML =
